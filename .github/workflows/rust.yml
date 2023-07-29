@@ -2,12 +2,9 @@ name: rust
 
 on:
   pull_request:
-    branches:
-      - dev
+    branches: [dev, main]
   push:
-    branches:
-      - main
-      - dev
+    branches: [dev, main]
 
 jobs:
   clippy:
@@ -37,7 +34,7 @@ jobs:
       matrix:
         include:
           - { rust: 1.47.0, os: windows-2019 }
-          - { rust: 1.47.0, os: macos-latest }
+          - { rust: 1.47.0, os: macos-11 }
           - { rust: 1.47.0, os: ubuntu-latest }
           - { rust: stable, os: windows-2019 }
           - { rust: stable-i686-msvc, os: windows-2019 }

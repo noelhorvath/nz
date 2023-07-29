@@ -4,7 +4,7 @@
 [![docs](https://docs.rs/nz/badge.svg)](https://docs.rs/nz)
 [![License:Zlib](https://img.shields.io/badge/License-Zlib-brightgreen.svg)](https://opensource.org/licenses/Zlib)
 ![Minimum Rust Version](https://img.shields.io/badge/Min%20Rust-1.47-green.svg)
-[![Rust](https://github.com/noelhorvath/nz/workflows/rust/badge.svg)](https://github.com/noelhorvath/nz/actions?query=workflow%3rust)
+[![Build status](https://github.com/noelhorvath/nz/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/noelhorvath/nz/actions/workflows/rust.yml)
 ![Unsafe-Zero-Percent](https://img.shields.io/badge/Unsafety-0%25-brightgreen.svg)
 
 The `nz` crate provides a collection of user-friendly macros that simplify the creation

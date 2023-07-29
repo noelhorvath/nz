@@ -1,4 +1,4 @@
-//! # nz (non-zero)
+//! # nz
 //!
 //! The `nz` crate provides a collection of user-friendly macros that simplify the creation
 //! of new instances of non-zero numeric types found in the [`core::num`]. With these macros,

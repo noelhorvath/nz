@@ -1,19 +1,19 @@
 //! # nz
 //!
-//! The `nz` crate provides a collection of user-friendly macros that simplify the creation
-//! of new instances of non-zero numeric types found in the [`core::num`]. With these macros,
-//! you can effortlessly generate instances using numeric literals, constant values and
-//! constant expressions, all at compile time.
+//! The `nz` crate provides a collection of macros that simplify the creation of
+//! new instances of non-zero numeric types implemented in [`core::num`]. With
+//! these macros, you can easily generate constants of such core types using numeric
+//! literals, constant values or expressions, all at compile time.
 //!
 //! ## Features
 //! * No unsafe code
 //! * No dependencies
 //! * `no_std` compatible
-//! * Supports all numeric non-zero types from the [`core::num`] module
+//! * Supports all `core::num::NonZero{Integer}` types
 //! * Compile time evaluation
 //! * Zero detection at compile time
 //!
-//! ## `NonZero` macros
+//! ## Macros
 //!
 //! | Type | Macro |
 //! |------|-------|
@@ -33,29 +33,83 @@
 //! ## Basic usage
 //!
 //! ```rust
-//! # use core::num::NonZeroU8;
-//! const NZ_U8_MIN: NonZeroU8 = nz::u8!(1); // with numeric literal
-//! const NZ_U8_MAX: NonZeroU8 = nz::u8!(u8::MAX); // with constant value
-//! let sum = nz::u8!(NZ_U8_MAX.get() & NZ_U8_MIN.get() + 7); // with constant expression
-//! # assert_eq!(0b1000, sum.get());
+//! use core::num::NonZeroU8;
+//! // A NonZero type can be constructed by different
+//! // types of arguments when using the matching macro
+//! //
+//! // such argument can be a numeric literal
+//! const NZ_MIN: NonZeroU8 = nz::u8!(1);
+//! let nz_two = nz::u8!(2);
+//! # assert_eq!(2, nz_two.get());
+//! // or a constant value
+//! const NZ_MAX: NonZeroU8 = nz::u8!(u8::MAX);
+//! let five = nz::u8!({ const FIVE: u8 = 5; FIVE });
+//! # assert_eq!(5, five.get());
+//! // or even a constant expression
+//! const RES: NonZeroU8 = nz::u8!({ 3 + 7 } - NZ_MIN.get());
+//! // non-constant expression leads to compile-time error
+//! // const OUTPUT: NonZeroU8 = nz::u8!({ 3 + 7 } - nz_two.get()); // casued by `mz_two.get()`
+//! let result_as_nz = nz::u8!((NZ_MIN.get() & NZ_MAX.get()) + 7);
+//! # assert_eq!(0b1000, result_as_nz.get());
 //! ```
 //!
-//! ## Remarks
+//! ## Limitations
 //!
-//! Non-zero macros cannot be used with constant function arguments as they
-//! are not constant values.
+//! ### const fn
 //!
-//! ### Example
+//! Declarative macros (such as all the `nz` macros) cannot be used with
+//! constant function arguments since they are not currently recognized
+//! as constant values, as demonstrated in the code below.
 //!
 //! ```rust, compile_fail
 //! # use core::num::NonZeroU64;
-//! # use nz;
 //! const fn wrapping_add_nz(a: u64, b: NonZeroU64) -> NonZeroU64 {
 //!     // `a` and `b` is not constant
-//!     nz::u64!(a.wrapping_add(b.get())) // <- cause of the compile error
+//!     // the line below causes compile error
+//!     nz::u64!(a.wrapping_add(b.get()))
 //! }
 //!
 //! let nz = wrapping_add_nz(2, nz::u64!(1));
+//! ```
+//!
+//! ### const hygiene
+//!
+//! When constants are used in a declarative macro, specifically in the
+//! most outer scope where a constant can be declared, there is a possibility
+//! of "name collision" when an expression is expected as an argument and an
+//! outer constant is used within that expression. This "collision" can occur
+//! if  any of the inner constants share the same name as the outer constant.
+//! The code snippet below demonstrates this scenario.
+//!
+//! This collision between the outer and inner constants leads to a compile-time
+//! error, specifically [`[E0391]`](<https://doc.rust-lang.org/error_codes/E0391.html>),
+//! because the inner macro constant tries to reference itself, creating a cyclic
+//! dependency during the evaluation of the macro at compile-time.
+//!
+//! ```rust, compile_fail
+//! # use core::num::NonZeroU16;
+//! const NZ: NonZeroU16 = nz::u16!(0xA3FE);
+//! const CHECK_ZERO: NonZeroU16 = nz::u16!(777);
+//! // although `CHECK_ZERO` is used in the macro
+//! // it won't collide when passing it in a constant
+//! // expression, because it is not in the most outer
+//! // scope where a constant is declared
+//! const OK: NonZeroU16 = nz::u16!(CHECK_ZERO.get());
+//! // using NUM.get() is fine
+//! const ___NZ___INTERNAL___NUM___1___: u16
+//!     = nz::u16!(NZ.get()).get();
+//! // using `___NZ___INTERNAL___NUM___1___` constant as the argument
+//! // causes compile-time error in the code line below, because the
+//! // internal macro constant has the same identifier
+//! const FAILS: NonZeroU16 = nz::u16!(
+//!     ___NZ___INTERNAL___NUM___1___ // <-- error
+//! );
+//! ```
+//!
+//! Essentially, the code above has the same error as this
+//! single line:
+//! ```rust, compile_fail
+//! const X: u8 = X;
 //! ```
 
 #![no_std]
@@ -68,7 +122,7 @@ macro_rules! gen_nonzero_macros {
         type ZeroError = $zero_error:ident;
         $(
             $non_zero_type:ty => {
-                type Numeric = $num_type:ty;
+                type Numeric = $num_type:ident;
 
                 $(#[$macro_attr:meta])*
                 macro_rules! $macro_name:ident;
@@ -81,13 +135,15 @@ macro_rules! gen_nonzero_macros {
             $(#[$macro_attr])*
             macro_rules! $macro_name {
                 ($num:expr) => {{
-                    const __NUM__: $num_type = $num;
-                    const __ZERO_CHECK__: [$crate::$zero_error; (__NUM__ == 0) as usize] = [];
-                    const __NZ__: $non_zero_type = match <$non_zero_type>::new(__NUM__) {
-                        Some(nz) => nz,
-                        None => loop {}, // unreachable
-                    };
-                    __NZ__
+                    const ___NZ___INTERNAL___NUM___1___: $num_type = $num;
+                    {
+                        const ZERO_CHECK: [$crate::$zero_error; (___NZ___INTERNAL___NUM___1___ == 0) as usize] = [];
+                        const NZ: $non_zero_type = match <$non_zero_type>::new(___NZ___INTERNAL___NUM___1___) {
+                            Some(non_zero) => non_zero,
+                            None => loop {}, // unreachable
+                        };
+                        NZ
+                    }
                 }};
             }
         )*
@@ -117,8 +173,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroI8` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroI8;
-        /// let nz = nz::i8!(27);
         /// const NZ: NonZeroI8 = nz::i8!(0x10);
+        /// let nz = nz::i8!(27);
         /// # assert_eq!(27, nz.get());
         /// # assert_eq!(0x10, NZ.get());
         /// ```
@@ -126,12 +182,11 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroI8` using a constant value
         /// ```rust
         /// # use core::num::NonZeroI8;
-        /// const MIN: i8 = -128;
         /// const MAX: i8 = 127;
-        /// let nz = nz::i8!(MAX);
-        /// const NZ: NonZeroI8 = nz::i8!(MIN);
+        /// const NZ: NonZeroI8 = nz::i8!(MAX);
+        /// let nz = nz::i8!(NZ.get());
         /// # assert_eq!(MAX, nz.get());
-        /// # assert_eq!(MIN, NZ.get());
+        /// # assert_eq!(nz, NZ);
         /// ```
         ///
         /// #### Creating `NonZeroI8` using a constant expression
@@ -183,8 +238,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroI16` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroI16;
-        /// let nz = nz::i16!(0b0011_0001);
         /// const NZ: NonZeroI16 = nz::i16!(61);
+        /// let nz = nz::i16!(0b0011_0001);
         /// # assert_eq!(0b0011_0001, nz.get());
         /// # assert_eq!(61, NZ.get());
         /// ```
@@ -194,10 +249,10 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroI16;
         /// const POSITIVE: i16 = 1;
         /// const NEGATIVE: i16 = -8;
-        /// let nz = nz::i16!(POSITIVE);
         /// const NZ: NonZeroI16 = nz::i16!(NEGATIVE);
-        /// # assert_eq!(POSITIVE, nz.get());
+        /// let nz = nz::i16!(POSITIVE);
         /// # assert_eq!(NEGATIVE, NZ.get());
+        /// # assert_eq!(POSITIVE, nz.get());
         /// ```
         ///
         /// #### Creating `NonZeroI16` using a constant expression
@@ -249,8 +304,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroI32` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroI32;
-        /// let nz = nz::i32!(99);
         /// const NZ: NonZeroI32 = nz::i32!(0o32);
+        /// let nz = nz::i32!(99);
         /// # assert_eq!(99, nz.get());
         /// # assert_eq!(0o32, NZ.get());
         /// ```
@@ -260,8 +315,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroI32;
         /// const POSITIVE: i32 = 8;
         /// const NEGATIVE: i32 = -1;
-        /// let nz = nz::i32!(POSITIVE);
         /// const NZ: NonZeroI32 = nz::i32!(NEGATIVE);
+        /// let nz = nz::i32!(POSITIVE);
         /// # assert_eq!(POSITIVE, nz.get());
         /// # assert_eq!(NEGATIVE, NZ.get());
         /// ```
@@ -315,8 +370,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroI64` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroI64;
-        /// let nz = nz::i64!(841);
         /// const NZ: NonZeroI64 = nz::i64!(0xFEFF);
+        /// let nz = nz::i64!(841);
         /// # assert_eq!(841, nz.get());
         /// # assert_eq!(0xFEFF, NZ.get());
         /// ```
@@ -326,8 +381,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroI64;
         /// const POSITIVE: i64 = 4;
         /// const NEGATIVE: i64 = -3;
-        /// let nz = nz::i64!(POSITIVE);
         /// const NZ: NonZeroI64 = nz::i64!(NEGATIVE);
+        /// let nz = nz::i64!(POSITIVE);
         /// # assert_eq!(POSITIVE, nz.get());
         /// # assert_eq!(NEGATIVE, NZ.get());
         /// ```
@@ -381,8 +436,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroI128` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroI128;
-        /// let nz = nz::i128!(0b1111_1110);
         /// const NZ: NonZeroI128 = nz::i128!(72);
+        /// let nz = nz::i128!(0b1111_1110);
         /// # assert_eq!(0b1111_1110, nz.get());
         /// # assert_eq!(72, NZ.get());
         /// ```
@@ -392,8 +447,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroI128;
         /// const POSITIVE: i128 = 3;
         /// const NEGATIVE: i128 = -4;
-        /// let nz = nz::i128!(POSITIVE);
         /// const NZ: NonZeroI128 = nz::i128!(NEGATIVE);
+        /// let nz = nz::i128!(POSITIVE);
         /// # assert_eq!(POSITIVE, nz.get());
         /// # assert_eq!(NEGATIVE, NZ.get());
         /// ```
@@ -447,8 +502,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroIsize` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroIsize;
-        /// let nz = nz::isize!(2023);
         /// const NZ: NonZeroIsize = nz::isize!(0b0001);
+        /// let nz = nz::isize!(2023);
         /// # assert_eq!(2023, nz.get());
         /// # assert_eq!(1, NZ.get());
         /// ```
@@ -458,8 +513,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroIsize;
         /// const POSITIVE: isize = 7;
         /// const NEGATIVE: isize = -4;
-        /// let nz = nz::isize!(POSITIVE);
         /// const NZ: NonZeroIsize = nz::isize!(NEGATIVE);
+        /// let nz = nz::isize!(POSITIVE);
         /// # assert_eq!(POSITIVE, nz.get());
         /// # assert_eq!(NEGATIVE, NZ.get());
         /// ```
@@ -513,8 +568,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroU8` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroU8;
-        /// let nz = nz::u8!(0o17);
         /// const NZ: NonZeroU8 = nz::u8!(25);
+        /// let nz = nz::u8!(0o17);
         /// # assert_eq!(0o17, nz.get());
         /// # assert_eq!(25, NZ.get());
         /// ```
@@ -524,8 +579,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroU8;
         /// const ONE: u8 = 1;
         /// const LIMIT: u8 = 255;
-        /// let nz = nz::u8!(ONE);
         /// const NZ: NonZeroU8 = nz::u8!(LIMIT);
+        /// let nz = nz::u8!(ONE);
         /// # assert_eq!(ONE, nz.get());
         /// # assert_eq!(LIMIT, NZ.get());
         /// ```
@@ -579,8 +634,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroU16` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroU16;
-        /// let nz = nz::u16!(283);
         /// const NZ: NonZeroU16 = nz::u16!(0b0001_1111);
+        /// let nz = nz::u16!(283);
         /// # assert_eq!(283, nz.get());
         /// # assert_eq!(0b0001_1111, NZ.get());
         /// ```
@@ -590,8 +645,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroU16;
         /// const ONE: u16 = 1;
         /// const LIMIT: u16 = 65535;
-        /// let nz = nz::u16!(LIMIT);
         /// const NZ: NonZeroU16 = nz::u16!(ONE);
+        /// let nz = nz::u16!(LIMIT);
         /// # assert_eq!(LIMIT, nz.get());
         /// # assert_eq!(ONE, NZ.get());
         /// ```
@@ -645,8 +700,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroU32` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroU32;
-        /// let nz = nz::u32!(0o713);
         /// const NZ: NonZeroU32 = nz::u32!(3);
+        /// let nz = nz::u32!(0o713);
         /// # assert_eq!(0o713, nz.get());
         /// # assert_eq!(3, NZ.get());
         /// ```
@@ -656,8 +711,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroU32;
         /// const ONE: u32 = 1;
         /// const LIMIT: u32 = 101;
-        /// let nz = nz::u32!(ONE);
         /// const NZ: NonZeroU32 = nz::u32!(LIMIT);
+        /// let nz = nz::u32!(ONE);
         /// # assert_eq!(ONE, nz.get());
         /// # assert_eq!(LIMIT, NZ.get());
         /// ```
@@ -711,8 +766,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroU64` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroU64;
-        /// let nz = nz::u64!(40);
         /// const NZ: NonZeroU64 = nz::u64!(0xABF1);
+        /// let nz = nz::u64!(40);
         /// # assert_eq!(40, nz.get());
         /// # assert_eq!(0xABF1, NZ.get());
         /// ```
@@ -722,8 +777,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroU64;
         /// const ONE: u64 = 1;
         /// const LIMIT: u64 = 24;
-        /// let nz = nz::u64!(ONE);
         /// const NZ: NonZeroU64 = nz::u64!(LIMIT);
+        /// let nz = nz::u64!(ONE);
         /// # assert_eq!(ONE, nz.get());
         /// # assert_eq!(LIMIT, NZ.get());
         /// ```
@@ -777,8 +832,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroU128` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroU128;
-        /// let nz = nz::u128!(0o200);
         /// const NZ: NonZeroU128 = nz::u128!(80);
+        /// let nz = nz::u128!(0o200);
         /// # assert_eq!(0o200, nz.get());
         /// # assert_eq!(80, NZ.get());
         /// ```
@@ -788,8 +843,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroU128;
         /// const ONE: u128 = 1;
         /// const LIMIT: u128 = 128;
-        /// let nz = nz::u128!(LIMIT);
         /// const NZ: NonZeroU128 = nz::u128!(ONE);
+        /// let nz = nz::u128!(LIMIT);
         /// # assert_eq!(LIMIT, nz.get());
         /// # assert_eq!(ONE, NZ.get());
         /// ```
@@ -843,8 +898,8 @@ gen_nonzero_macros! {
         /// #### Creating `NonZeroUsize` using a numeric literal
         /// ```rust
         /// # use core::num::NonZeroUsize;
-        /// let nz = nz::usize!(2);
         /// const NZ: NonZeroUsize = nz::usize!(0x10FF);
+        /// let nz = nz::usize!(2);
         /// # assert_eq!(2, nz.get());
         /// # assert_eq!(0x10FF, NZ.get());
         /// ```
@@ -854,8 +909,8 @@ gen_nonzero_macros! {
         /// # use core::num::NonZeroUsize;
         /// const ONE: usize = 1;
         /// const LIMIT: usize = 36;
-        /// let nz = nz::usize!(ONE);
         /// const NZ: NonZeroUsize = nz::usize!(LIMIT);
+        /// let nz = nz::usize!(ONE);
         /// # assert_eq!(ONE, nz.get());
         /// # assert_eq!(LIMIT, NZ.get());
         /// ```

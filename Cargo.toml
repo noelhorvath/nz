@@ -1,6 +1,6 @@
 [package]
 authors = ["Noel Horváth <noelhorvath69@gmail.com>"]
-categories = ["no_std", "rust-patterns", "mathematics"]
+categories = ["no-std", "rust-patterns", "mathematics"]
 description = "Collection of 100% safe macros for creating numeric non-zero types more easily."
 edition = "2018"
 keywords = ["nonzero", "non-zero", "no_std", "no-std", "const"]

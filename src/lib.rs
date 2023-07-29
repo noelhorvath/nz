@@ -2,7 +2,7 @@
 //!
 //! The `nz` crate provides a collection of macros that simplify the creation of
 //! new instances of non-zero numeric types implemented in [`core::num`]. With
-//! these macros, you can easily generate constants of such core types using numeric
+//! these macros, you can easily generate constants of such numeric types using
 //! literals, constant values or expressions, all at compile time.
 //!
 //! ## Features

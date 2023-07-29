@@ -1,7 +1,14 @@
-# nz (non-zero)
+# nz
+
+[![crates.io](https://img.shields.io/crates/v/nz.svg)](https://crates.io/crates/hyper)
+[![docs](https://docs.rs/nz/badge.svg)](https://docs.rs/nz)
+[![License:Zlib](https://img.shields.io/badge/License-Zlib-brightgreen.svg)](https://opensource.org/licenses/Zlib)
+![Minimum Rust Version](https://img.shields.io/badge/Min%20Rust-1.47-green.svg)
+[![Rust](https://github.com/noelhorvath/nz/workflows/rust/badge.svg)](https://github.com/noelhorvath/nz/actions?query=workflow%3rust)
+![Unsafe-Zero-Percent](https://img.shields.io/badge/Unsafety-0%25-brightgreen.svg)
 
 The `nz` crate provides a collection of user-friendly macros that simplify the creation
-of new instances of non-zero numeric types found in the [`core::num`]. With these macros,
+of new instances of non-zero numeric types found in the [`core::num`](https://doc.rust-lang.org/stable/core/num). With these macros,
 you can effortlessly generate instances using numeric literals, constant values and
 constant expressions, all at compile time.
 
@@ -10,7 +17,7 @@ constant expressions, all at compile time.
 * No unsafe code
 * No dependencies
 * `no_std` compatible
-* Supports all numeric non-zero types from the [`core::num`] module
+* Supports all numeric non-zero types from the [`core::num`](https://doc.rust-lang.org/stable/core/num) module
 * Compile time evaluation
 * Zero detection at compile time
 
@@ -44,7 +51,7 @@ let sum = nz::u8!(NZ_U8_MAX.get() & NZ_U8_MIN.get() + 7); // with constant expre
 ## Remarks
 
 Non-zero macros cannot be used with constant function arguments as they
-are not constant values.
+are not considered as constant values.
 
 ### Example
 

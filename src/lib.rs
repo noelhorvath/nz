@@ -76,15 +76,11 @@
 //!
 //! When constants are used in a declarative macro, specifically in the
 //! most outer scope where a constant can be declared, there is a possibility
-//! of "name collision" when an expression is expected as an argument and an
+//! of cyclic reference when an expression is expected as an argument and an
 //! outer constant is used within that expression. This "collision" can occur
-//! if  any of the inner constants share the same name as the outer constant.
-//! The code snippet below demonstrates this scenario.
-//!
-//! This collision between the outer and inner constants leads to a compile-time
-//! error, specifically [`[E0391]`](<https://doc.rust-lang.org/error_codes/E0391.html>),
-//! because the inner macro constant tries to reference itself, creating a cyclic
-//! dependency during the evaluation of the macro at compile-time.
+//! if any of the inner constants share the same identifier as the outer constant
+//! after the macro is expanded compile-time. The code snippet below demonstrates
+//! this scenario.
 //!
 //! ```rust, compile_fail
 //! # use core::num::NonZeroU16;
@@ -106,8 +102,11 @@
 //! );
 //! ```
 //!
-//! Essentially, the code above has the same error as this
-//! single line:
+//! This "collision" between the outer and inner constants leads to a compile-time
+//! error, specifically error [`[E0391]`](https://doc.rust-lang.org/error_codes/E0391.html),
+//! because the inner macro constant tries to use itself, creating a cyclic dependency
+//! during the evaluation of the macro at compile-time. Essentially, the code above has
+//! the same error as this single line:
 //! ```rust, compile_fail
 //! const X: u8 = X;
 //! ```

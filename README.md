@@ -47,17 +47,14 @@ use core::num::NonZeroU8;
 // such argument can be a numeric literal
 const NZ_MIN: NonZeroU8 = nz::u8!(1);
 let nz_two = nz::u8!(2);
-# assert_eq!(2, nz_two.get());
 // or a constant value
 const NZ_MAX: NonZeroU8 = nz::u8!(u8::MAX);
 let five = nz::u8!({ const FIVE: u8 = 5; FIVE });
-# assert_eq!(5, five.get());
 // or even a constant expression
 const RES: NonZeroU8 = nz::u8!({ 3 + 7 } - NZ_MIN.get());
 // non-constant expression leads to compile-time error
 // const OUTPUT: NonZeroU8 = nz::u8!({ 3 + 7 } - nz_two.get()); // casued by `mz_two.get()`
 let result_as_nz = nz::u8!((NZ_MIN.get() & NZ_MAX.get()) + 7);
-# assert_eq!(0b1000, result_as_nz.get());
 ```
 
 ## Limitations
@@ -69,7 +66,8 @@ constant function arguments since they are not currently recognized
 as constant values, as demonstrated in the code below.
 
 ```rust, compile_fail
-# use core::num::NonZeroU64;
+use core::num::NonZeroU64;
+
 const fn wrapping_add_nz(a: u64, b: NonZeroU64) -> NonZeroU64 {
     // `a` and `b` is not constant
     // the line below causes compile error
@@ -82,18 +80,15 @@ let nz = wrapping_add_nz(2, nz::u64!(1));
 
 When constants are used in a declarative macro, specifically in the
 most outer scope where a constant can be declared, there is a possibility
-of "name collision" when an expression is expected as an argument and an
+of cyclic reference when an expression is expected as an argument and an
 outer constant is used within that expression. This "collision" can occur
-if  any of the inner constants share the same name as the outer constant.
-The code snippet below demonstrates this scenario.
-
-This collision between the outer and inner constants leads to a compile-time
-error, specifically error [`[E0391]`](<https://doc.rust-lang.org/error_codes/E0391.html>),
-because the inner macro constant tries to reference itself, creating a cyclic
-dependency during the evaluation of the macro at compile-time.
+if any of the inner constants share the same identifier as the outer constant
+after the macro is expanded compile-time. The code snippet below demonstrates
+this scenario.
 
 ```rust, compile_fail
-# use core::num::NonZeroU16;
+use core::num::NonZeroU16;
+
 const NZ: NonZeroU16 = nz::u16!(0xA3FE);
 const CHECK_ZERO: NonZeroU16 = nz::u16!(777);
 // although `CHECK_ZERO` is used in the macro
@@ -112,8 +107,11 @@ const FAILS: NonZeroU16 = nz::u16!(
 );
 ```
 
-Essentially, the code above has the same error as this
-single line:
+This "collision" between the outer and inner constants leads to a compile-time
+error, specifically error [`[E0391]`](https://doc.rust-lang.org/error_codes/E0391.html),
+because the inner macro constant tries to use itself, creating a cyclic dependency
+during the evaluation of the macro at compile-time. Essentially, the code above has
+the same error as this single line:
 ```rust, compile_fail
 const X: u8 = X;
 ```

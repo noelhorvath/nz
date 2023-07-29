@@ -86,10 +86,10 @@
 //! # use core::num::NonZeroU16;
 //! const NZ: NonZeroU16 = nz::u16!(0xA3FE);
 //! const CHECK_ZERO: NonZeroU16 = nz::u16!(777);
-//! // although `CHECK_ZERO` is used in the macro
-//! // it won't collide when passing it in a constant
-//! // expression, because it is not in the most outer
-//! // scope where a constant is declared
+//! // although `CHECK_ZERO` is used in `nz::u16!` macro, it will not result in
+//! // an error when a constant with the same name is passed as part
+//! // of a constant expression, because this inner macro constant is not
+//! // declared in the most outer scope
 //! const OK: NonZeroU16 = nz::u16!(CHECK_ZERO.get());
 //! // using NUM.get() is fine
 //! const ___NZ___INTERNAL___NUM___1___: u16

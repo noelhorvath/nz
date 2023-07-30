@@ -33,9 +33,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { rust: 1.47.0, os: windows-2019 }
-          - { rust: 1.47.0, os: macos-11 }
-          - { rust: 1.47.0, os: ubuntu-latest }
+          - { rust: 1.56.0, os: windows-2019 }
+          - { rust: 1.56.0, os: macos-11 }
+          - { rust: 1.56.0, os: ubuntu-latest }
           - { rust: stable, os: windows-2019 }
           - { rust: stable-i686-msvc, os: windows-2019 }
           - { rust: stable, os: macos-latest }

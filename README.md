@@ -4,12 +4,13 @@
 [![docs](https://img.shields.io/docsrs/nz/latest?style=for-the-badge)](https://docs.rs/nz)
 [![license](https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge)](#license)
 [![rust](https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/rust.yml?event=push&style=for-the-badge)](https://github.com/noelhorvath/nz/actions/workflows/rust.yml)
-[![msrv](https://img.shields.io/badge/MSRV-1.47.0-F21D1D?style=for-the-badge)](https://releases.rs/docs/1.47.0/)
-![safety](https://img.shields.io/badge/Safety-100%25-brightgreen?style=for-the-badge)
+[![msrv](https://img.shields.io/badge/MSRV-1.56.0-F21D1D?style=for-the-badge)](https://releases.rs/docs/1.56.0/)
+![unsafety](https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge)
 
-The `nz` crate provides a collection of macros that simplify the creation of
-new instances of non-zero numeric types implemented in [`core::num`](https://doc.rust-lang.org/core/num/index.html). With these macros, you can easily generate constants of such numeric types using
-literals, constant values or expressions, all at compile time.
+The `nz` crate provides a collection of macros that simplify the creation
+of non-zero numerics implemented in [`core::num`](https://doc.rust-lang.org/core/num/index.html).
+With these macros, you can easily generate constants of all the `NonZero`
+types using literals, constant values or expressions at compile time.
 
 ## Features
 
@@ -17,10 +18,9 @@ literals, constant values or expressions, all at compile time.
 * No dependencies
 * `no_std` compatible
 * Supports all `core::num::NonZero{Integer}` types
-* Compile time evaluation
-* Zero detection at compile time
+* Compile-time evaluation and zero detection
 
-## Macros
+## `NonZero` macros
 
 | Type | Macro |
 |------|-------|
@@ -41,36 +41,45 @@ literals, constant values or expressions, all at compile time.
 
 ```rust
 use core::num::NonZeroU8;
-// A NonZero type can be constructed by different
-// types of arguments when using the matching macro
-//
+// A `NonZeroU8` type can be constructed by different types
+// of arguments when using the matching macro.
 // such argument can be a numeric literal
 const NZ_MIN: NonZeroU8 = nz::u8!(1);
 let nz_two = nz::u8!(2);
 // or a constant value
 const NZ_MAX: NonZeroU8 = nz::u8!(u8::MAX);
-let five = nz::u8!({ const FIVE: u8 = 5; FIVE });
+const SIX: u8 = 6;
+let six = nz::u8!(SIX);
 // or even a constant expression
 const RES: NonZeroU8 = nz::u8!({ 3 + 7 } - NZ_MIN.get());
-// non-constant expression leads to compile-time error
-// const OUTPUT: NonZeroU8 = nz::u8!({ 3 + 7 } - nz_two.get()); // casued by `mz_two.get()`
-let result_as_nz = nz::u8!((NZ_MIN.get() & NZ_MAX.get()) + 7);
+// non-constant expression results in a compile-time error
+// which is caused by `nz_two` in this case
+// const OUTPUT: NonZeroU8 = nz::u8!({ 3 + 7 } - nz_two.get());
+let res = nz::u8!((NZ_MIN.get() & NZ_MAX.get()) + 7);
+let five = nz::u8!({ const FIVE: u8 = 5; FIVE });
+# assert_eq!(1, NZ_MIN.get());
+# assert_eq!(2, nz_two.get());
+# assert_eq!(6, six.get());
+# assert_eq!(5, five.get());
+# assert_eq!(9, RES.get());
+# assert_eq!(8, res.get());
 ```
 
 ## Limitations
 
 ### const fn
 
-Declarative macros (such as all the `nz` macros) cannot be used with
-constant function arguments since they are not currently recognized
-as constant values, as demonstrated in the code below.
+Declarative macros, such as all the `nz` macros, cannot be used with
+constant function arguments since they are not considered constant
+values, as demonstrated in the code below.
 
 ```rust, compile_fail
 use core::num::NonZeroU64;
 
 const fn wrapping_add_nz(a: u64, b: NonZeroU64) -> NonZeroU64 {
-    // `a` and `b` is not constant
-    // the line below causes compile error
+    // `a` and `b` is not constant which results
+    // in a compile-time error when passed to
+    // `nz::u64!` in an expression
     nz::u64!(a.wrapping_add(b.get()))
 }
 let nz = wrapping_add_nz(2, nz::u64!(1));
@@ -80,10 +89,10 @@ let nz = wrapping_add_nz(2, nz::u64!(1));
 
 When constants are used in a declarative macro, specifically in the
 most outer scope where a constant can be declared, there is a possibility
-of cyclic reference when an expression is expected as an argument and an
-outer constant is used within that expression. This "collision" can occur
+of cyclic dependency when an expression is expected as an argument and an
+outer constant is used within that expression. This *collision* can occur
 if any of the inner constants share the same identifier as the outer constant
-after the macro is expanded compile-time. The code snippet below demonstrates
+after the macro is expanded at compile-time. The code snippet below demonstrates
 this scenario.
 
 ```rust, compile_fail
@@ -101,20 +110,22 @@ const ___NZ___INTERNAL___NUM___1___: u16
     = nz::u16!(NZ.get()).get();
 // using `___NZ___INTERNAL___NUM___1___` constant as the argument
 // causes compile-time error in the code line below, because the
-// internal macro constant has the same identifier
-const FAILS: NonZeroU16 = nz::u16!(
-    ___NZ___INTERNAL___NUM___1___ // <-- error
-);
+// internal macro constant has the same identifier as the constant
+// specified in the macro argument
+const _: NonZeroU16 = nz::u16!(___NZ___INTERNAL___NUM___1___);
 ```
 
-This "collision" between the outer and inner constants leads to a compile-time
-error, specifically error [`[E0391]`](https://doc.rust-lang.org/error_codes/E0391.html),
-because the inner macro constant tries to use itself, creating a cyclic dependency
-during the evaluation of the macro at compile-time. Essentially, the code above has
-the same error as this single line:
+More concisely, the problem is:
+
 ```rust, compile_fail
 const X: u8 = X;
 ```
+
+This *collision* between the outer and inner constants results in a compile-time
+error[^cd_error], because the inner macro constant depends on itself, creating
+a cyclic dependency.
+
+[^cd_error]: [`[E0391]`](https://doc.rust-lang.org/error_codes/E0391.html),
 
 ## License
 

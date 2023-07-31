@@ -1,12 +1,12 @@
 [package]
 authors = ["Noel Horváth <noelhorvath69@gmail.com>"]
 categories = ["no-std", "rust-patterns", "mathematics"]
-description = "Collection of 100% safe macros for creating NonZero{Integer} types more easily."
-edition = "2018"
+description = "Collection of 100% safe macros for creating core::num::NonZero{Integer} types more easily."
+edition = "2021"
 keywords = ["nonzero", "non-zero", "no_std", "no-std", "const"]
 license = "Zlib OR Apache-2.0 OR MIT"
 name = "nz"
 readme = "README.md"
 repository = "https://github.com/noelhorvath/nz"
 rust-version = "1.56.0"
-version = "0.2.1"
+version = "0.2.2"

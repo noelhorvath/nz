@@ -56,15 +56,15 @@ gen_non_zero_macros! {
         type Numeric = i8;
 
         /// Creates a [`NonZeroI8`][`core::num::NonZeroI8`] from an
-        /// [`prim@i8`] literal, a constant value or expression tha
+        /// [`prim@i8`] literal, a constant value or expression that
         /// evaluates to  [`prim@i8`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@i8]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@i8].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -128,15 +128,15 @@ gen_non_zero_macros! {
         type Numeric = i16;
 
         /// Creates a [`NonZeroI16`][`core::num::NonZeroI16`] from an
-        /// [`prim@i16`] literal, a constant value or expression tha
+        /// [`prim@i16`] literal, a constant value or expression that
         /// evaluates to  [`prim@i16`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@i16]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@i16].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -201,15 +201,15 @@ gen_non_zero_macros! {
         type Numeric = i32;
 
         /// Creates a [`NonZeroI32`][`core::num::NonZeroI32`] from an
-        /// [`prim@i32`] literal, a constant value or expression tha
+        /// [`prim@i32`] literal, a constant value or expression that
         /// evaluates to  [`prim@i32`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@i32]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@i32].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -274,15 +274,15 @@ gen_non_zero_macros! {
         type Numeric = i64;
 
         /// Creates a [`NonZeroI64`][`core::num::NonZeroI64`] from an
-        /// [`prim@i64`] literal, a constant value or expression tha
+        /// [`prim@i64`] literal, a constant value or expression that
         /// evaluates to  [`prim@i64`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@i64]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@i64].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -347,15 +347,15 @@ gen_non_zero_macros! {
         type Numeric = i128;
 
         /// Creates a [`NonZeroI128`][`core::num::NonZeroI128`] from an
-        /// [`prim@i128`] literal, a constant value or expression tha
+        /// [`prim@i128`] literal, a constant value or expression that
         /// evaluates to  [`prim@i128`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@i128]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@i128].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -420,15 +420,15 @@ gen_non_zero_macros! {
         type Numeric = isize;
 
         /// Creates a [`NonZeroIsize`][`core::num::NonZeroIsize`] from an
-        /// [`prim@isize`] literal, a constant value or expression tha
+        /// [`prim@isize`] literal, a constant value or expression that
         /// evaluates to  [`prim@isize`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@isize]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@isize].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -493,15 +493,15 @@ gen_non_zero_macros! {
         type Numeric = u8;
 
         /// Creates a [`NonZeroU8`][`core::num::NonZeroU8`] from a
-        /// [`prim@u8`] literal, a constant value or expression tha
+        /// [`prim@u8`] literal, a constant value or expression that
         /// evaluates to  [`prim@u8`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@u8]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@u8].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -566,15 +566,15 @@ gen_non_zero_macros! {
         type Numeric = u16;
 
         /// Creates a [`NonZeroU16`][`core::num::NonZeroU16`] from a
-        /// [`prim@u16`] literal, a constant value or expression tha
+        /// [`prim@u16`] literal, a constant value or expression that
         /// evaluates to  [`prim@u16`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@u16]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@u16].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -639,15 +639,15 @@ gen_non_zero_macros! {
         type Numeric = u32;
 
         /// Creates a [`NonZeroU32`][`core::num::NonZeroU32`] from a
-        /// [`prim@u32`] literal, a constant value or expression tha
+        /// [`prim@u32`] literal, a constant value or expression that
         /// evaluates to  [`prim@u32`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@u32]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@u32].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -712,15 +712,15 @@ gen_non_zero_macros! {
         type Numeric = u64;
 
         /// Creates a [`NonZeroU64`][`core::num::NonZeroU64`] from a
-        /// [`prim@u64`] literal, a constant value or expression tha
+        /// [`prim@u64`] literal, a constant value or expression that
         /// evaluates to  [`prim@u64`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@u64]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@u64].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -785,15 +785,15 @@ gen_non_zero_macros! {
         type Numeric = u128;
 
         /// Creates a [`NonZeroU128`][`core::num::NonZeroU128`] from a
-        /// [`prim@u128`] literal, a constant value or expression tha
+        /// [`prim@u128`] literal, a constant value or expression that
         /// evaluates to  [`prim@u128`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@u128]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@u128].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
@@ -858,15 +858,15 @@ gen_non_zero_macros! {
         type Numeric = usize;
 
         /// Creates a [`NonZeroUsize`][`core::num::NonZeroUsize`] from a
-        /// [`prim@usize`] literal, a constant value or expression tha
+        /// [`prim@usize`] literal, a constant value or expression that
         /// evaluates to  [`prim@usize`].
         ///
         /// # Compilation errors
         ///
         /// Compilation error will occur in the following cases:
         ///
-        /// * The argument is either zero or non-constant
-        /// * The argument cannot be evaluated to a non-zero [prim@usize]
+        /// * The argument is either zero or non-constant.
+        /// * The argument cannot be evaluated to a non-zero [prim@usize].
         /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///

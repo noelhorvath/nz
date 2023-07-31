@@ -11,7 +11,7 @@
 [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
 [crates.io]: https://img.shields.io/crates/v/nz?style=for-the-badge&logo=rust
 [docs.rs]: https://img.shields.io/docsrs/nz/latest?style=for-the-badge&logo=docs.rs
-[rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/rust.yml&style=for-the-badge
+[rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/rust.yml?style=for-the-badge&logo=github
 [msrv]: https://img.shields.io/badge/MSRV-1.56.0-F21D1D?style=for-the-badge&logo=rust
 [unsafety]: https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge&logo=rust
 [license]: https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge

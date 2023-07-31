@@ -1,11 +1,20 @@
 # nz
 
-[![crates.io](https://img.shields.io/crates/v/nz?style=for-the-badge)](https://crates.io/crates/nz)
-[![docs](https://img.shields.io/docsrs/nz/latest?style=for-the-badge)](https://docs.rs/nz)
-[![license](https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge)](#license)
-[![rust](https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/rust.yml?event=push&style=for-the-badge)](https://github.com/noelhorvath/nz/actions/workflows/rust.yml)
-[![msrv](https://img.shields.io/badge/MSRV-1.56.0-F21D1D?style=for-the-badge)](https://releases.rs/docs/1.56.0/)
-![unsafety](https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge)
+[![github]](https://github.com/noelhorvath/zn)
+[![crates.io]](https://crates.io/crates/nz)
+[![docs.rs]](https://docs.rs/nz)
+[![rust-ci]](https://github.com/noelhorvath/nz/actions/workflows/rust.yml)
+[![msrv]](https://releases.rs/docs/1.56.0/)
+![unsafety]
+[![license](#license)
+
+[github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
+[crates.io]: https://img.shields.io/crates/v/nz?style=for-the-badge&logo=rust
+[docs.rs]: https://img.shields.io/docsrs/nz/latest?style=for-the-badge&logo=docs.rs
+[rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/rust.yml&style=for-the-badge
+[msrv]: https://img.shields.io/badge/MSRV-1.56.0-F21D1D?style=for-the-badge&logo=rust
+[unsafety]: https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge&logo=rust
+[license]: https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge
 
 The `nz` crate provides a collection of macros that simplify the creation
 of non-zero numerics implemented in [`core::num`](https://doc.rust-lang.org/core/num/index.html).

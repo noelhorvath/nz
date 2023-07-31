@@ -1,6 +1,6 @@
 # nz
 
-[![github]](https://github.com/noelhorvath/zn)
+[![github]](https://github.com/noelhorvath/nz)
 [![crates.io]](https://crates.io/crates/nz)
 [![docs.rs]](https://docs.rs/nz)
 [![rust-ci]](https://github.com/noelhorvath/nz/actions/workflows/rust.yml)

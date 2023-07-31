@@ -6,7 +6,7 @@
 [![rust-ci]](https://github.com/noelhorvath/nz/actions/workflows/rust.yml)
 [![msrv]](https://releases.rs/docs/1.56.0/)
 ![unsafety]
-[![license](#license)
+[![license]](#license)
 
 [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
 [crates.io]: https://img.shields.io/crates/v/nz?style=for-the-badge&logo=rust

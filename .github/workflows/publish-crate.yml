@@ -7,20 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish-dry:
-    name: Publish dry run
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - run: cargo publish --dry-run
-
   publish:
     name: Publish crate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - run: cargo publish --token ${CRATES_TOKEN}Forsen123.
+      - run: cargo publish --dry-run
+      - run: cargo publish --token ${CRATES_TOKEN}
         env:
           CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}

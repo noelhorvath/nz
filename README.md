@@ -21,6 +21,10 @@ of non-zero numerics implemented in [`core::num`](https://doc.rust-lang.org/core
 With these macros, you can easily generate constants of all the `NonZero`
 types using literals, constant values or expressions at compile time.
 
+## Changelog
+
+All changes to `nz` crate are documented in [changelog.md](changelog.md).
+
 ## Features
 
 * No unsafe code

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - configure rust toolchain in `rust-toolchain.toml`
 - `publish-crate` workflow for publishing crate
+- `Changelog` section with link to `changelog.md`
 
 ### Changed
 

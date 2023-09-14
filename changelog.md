@@ -115,7 +115,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
-[0.3.0]: https://github.com/Author/Repository/compare/6a7e28d...HEAD
+[0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...HEAD
 [0.2.2]: https://github.com/noelhorvath/nz/compare/452838d...6a7e28d
 [0.2.1]: https://github.com/noelhorvath/nz/compare/3e63b92...452838d
 [0.2.0]: https://github.com/noelhorvath/nz/compare/1560ec0...3e63b92

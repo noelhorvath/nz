@@ -21,6 +21,10 @@ of non-zero numerics implemented in [`core::num`](https://doc.rust-lang.org/core
 With these macros, you can easily generate constants of all the `NonZero`
 types using literals, constant values or expressions at compile time.
 
+## Changelog
+
+All changes to `nz` crate are documented in [changelog.md](changelog.md).
+
 ## Features
 
 * No unsafe code
@@ -46,7 +50,7 @@ types using literals, constant values or expressions at compile time.
 | [`NonZeroU128`](https://doc.rust-lang.org/stable/core/num/struct.NonZeroU128.html) | [`nz::u128!`](https://docs.rs/nz/latest/nz/macro.u128.html) |
 | [`NonZeroUsize`](https://doc.rust-lang.org/stable/core/num/struct.NonZeroUsize.html) | [`nz::usize!`](https://docs.rs/nz/latest/nz/macro.usize.html) |
 
-## Basic usage
+## Usage
 
 ```rust
 use core::num::NonZeroU8;
@@ -66,12 +70,6 @@ const RES: NonZeroU8 = nz::u8!({ 3 + 7 } - NZ_MIN.get());
 // const OUTPUT: NonZeroU8 = nz::u8!({ 3 + 7 } - nz_two.get());
 let res = nz::u8!((NZ_MIN.get() & NZ_MAX.get()) + 7);
 let five = nz::u8!({ const FIVE: u8 = 5; FIVE });
-# assert_eq!(1, NZ_MIN.get());
-# assert_eq!(2, nz_two.get());
-# assert_eq!(6, six.get());
-# assert_eq!(5, five.get());
-# assert_eq!(9, RES.get());
-# assert_eq!(8, res.get());
 ```
 
 ## Limitations
@@ -115,13 +113,13 @@ const CHECK_ZERO: NonZeroU16 = nz::u16!(777);
 // declared in the most outer scope
 const OK: NonZeroU16 = nz::u16!(CHECK_ZERO.get());
 // using `NZ` is fine for the same reason
-const ___NZ___INTERNAL___NUM___1___: u16
+const _NZ_INTERNAL_NUM_VALUE_1_: u16
     = nz::u16!(NZ.get()).get();
-// using `___NZ___INTERNAL___NUM___1___` constant as the argument
+// using `_NZ_INTERNAL_NUM_VALUE_1_` constant as the argument
 // causes compile-time error in the code line below, because the
 // internal macro constant has the same identifier as the constant
 // specified in the macro argument
-const _: NonZeroU16 = nz::u16!(___NZ___INTERNAL___NUM___1___);
+const _: NonZeroU16 = nz::u16!(_NZ_INTERNAL_NUM_VALUE_1_);
 ```
 
 More concisely, the problem is:

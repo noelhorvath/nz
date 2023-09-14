@@ -4,6 +4,12 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [0.4.0] - 2023-09-14
+
+### Fixed
+
+- build with `1.56.0` toolchain instead of `nightly`
+
 ## [0.3.0] - 2023-09-14
 
 ### Added
@@ -116,6 +122,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 <!-- Versions -->
 [0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...HEAD
+[0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...
 [0.2.2]: https://github.com/noelhorvath/nz/compare/452838d...6a7e28d
 [0.2.1]: https://github.com/noelhorvath/nz/compare/3e63b92...452838d
 [0.2.0]: https://github.com/noelhorvath/nz/compare/1560ec0...3e63b92

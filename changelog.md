@@ -4,11 +4,11 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
-## [0.4.0] - 2023-09-14
+## [Unreleased]
 
-### Fixed
+### Removed
 
-- build with `1.56.0` toolchain instead of `nightly`
+- `publish-crate` workflow (2023-09-14)
 
 ## [0.3.0] - 2023-09-14
 
@@ -17,18 +17,26 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - configure rust toolchain in `rust-toolchain.toml`
 - `publish-crate` workflow for publishing crate
 - `Changelog` section with link to `changelog.md`
+- add dummy example for `ZeroIsInvalidForNonZero` never type
 
 ### Changed
 
 - rename `Basic usage` section to `Usage` in both `README.md` and `lib.rs`
 - remove trailing `.` from crate description
 - update `rust` workflow
+- update old macro const name to new in docs and comments
+- put all types between backticks in `NonZero macros` section in `lib.rs`
+
+#### Breaking changes
+- rename inner macro const to comply with `non-upper-case-globals` lint
 
 ### Fixed
 
 - correct repository link for `github` badge
 - correct link to `rust` workflow for `rust-ci` badge
 - `license` badge in `README.md`
+- comply with all doc lints
+- comply with `non-upper-case-globals` warning
 
 ## [0.2.2] - 2023-07-30
 
@@ -48,14 +56,14 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ### Changed
 
-- update `Cargo.toml`
-    - increase `MSRV` from `1.47.0` to `1.56.0`
-    - bump rust edition from `2018` to `2021`
+- bump rust edition from `2018` to `2021`
 - change `MSRV` for `test` job in `rust.yml`
 - merge `README.md` with crate documentation in `lib.rs`
 - include documentation for crate from `README.md`
 - update badges in `README.md`
 
+#### Breaking changes
+- increase `MSRV` from `1.47.0` to `1.56.0`
 
 ## [0.1.4] - 2023-07-29
 
@@ -84,8 +92,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - synchronize crate documentation with `README.md`
 - improve badges in `README.md`
 
-### Fixed
-
+#### Breaking changes
 - reduce possible const dependency cycles to minimal
 
 ## [0.1.2] - 2023-07-29
@@ -121,8 +128,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
-[0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...HEAD
-[0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...
+[Unreleased]: https://github.com/noelhorvath/nz/compare/6218e0c...HEAD
+[0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...6218e0c
 [0.2.2]: https://github.com/noelhorvath/nz/compare/452838d...6a7e28d
 [0.2.1]: https://github.com/noelhorvath/nz/compare/3e63b92...452838d
 [0.2.0]: https://github.com/noelhorvath/nz/compare/1560ec0...3e63b92

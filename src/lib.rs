@@ -28,18 +28,18 @@
 //!
 //! | Type | Macro |
 //! |------|-------|
-//! | [`NonZeroI8`][core::num::NonZeroI8] | [`nz::i8!`][crate::i8] |
-//! | [`NonZeroI16`][core::num::NonZeroI16] | [`nz::i16!`][crate::i16] |
-//! | [`NonZeroI32`][core::num::NonZeroI32] | [`nz::i32!`][crate::i32] |
-//! | [`NonZeroI64`][core::num::NonZeroI64] | [`nz::i64!`][crate::i64] |
-//! | [`NonZeroI128`][core::num::NonZeroI128] | [`nz::i128!`][crate::i128] |
-//! | [`NonZeroIsize`][core::num::NonZeroIsize] | [`nz::isize!`][crate::isize] |
-//! | [`NonZeroU8`][core::num::NonZeroU8] | [`nz::u8!`][crate::u8] |
-//! | [`NonZeroU16`][core::num::NonZeroU16] | [`nz::u16!`][crate::u16] |
-//! | [`NonZeroU32`][core::num::NonZeroU32] | [`nz::u32!`][crate::u32] |
-//! | [`NonZeroU64`][core::num::NonZeroU64] | [`nz::u64!`][crate::u64] |
-//! | [`NonZeroU128`][core::num::NonZeroU128] | [`nz::u128!`][crate::u128] |
-//! | [`NonZeroUsize`][core::num::NonZeroUsize] | [`nz::usize!`][crate::usize] |
+//! | [`NonZeroI8`][`core::num::NonZeroI8`] | [`nz::i8`!][`crate::i8`] |
+//! | [`NonZeroI16`][`core::num::NonZeroI16`] | [`nz::i16!`][`crate::i16`] |
+//! | [`NonZeroI32`][`core::num::NonZeroI32`] | [`nz::i32!`][`crate::i32`] |
+//! | [`NonZeroI64`][`core::num::NonZeroI64`] | [`nz::i64!`][`crate::i64`] |
+//! | [`NonZeroI128`][`core::num::NonZeroI128`] | [`nz::i128!`][`crate::i128`] |
+//! | [`NonZeroIsize`][`core::num::NonZeroIsize`] | [`nz::isize!`][`crate::isize`] |
+//! | [`NonZeroU8`][`core::num::NonZeroU8`] | [`nz::u8!`][`crate::u8`] |
+//! | [`NonZeroU16`][`core::num::NonZeroU16`] | [`nz::u16!`][`crate::u16`] |
+//! | [`NonZeroU32`][`core::num::NonZeroU32`] | [`nz::u32!`][`crate::u32`] |
+//! | [`NonZeroU64`][`core::num::NonZeroU64`] | [`nz::u64!`][`crate::u64`] |
+//! | [`NonZeroU128`][`core::num::NonZeroU128`] | [`nz::u128!`][`crate::u128`] |
+//! | [`NonZeroUsize`][`core::num::NonZeroUsize`] | [`nz::usize!`][`crate::usize`] |
 //!
 //! ## Basic usage
 //!
@@ -110,13 +110,13 @@
 //! // declared in the most outer scope
 //! const OK: NonZeroU16 = nz::u16!(CHECK_ZERO.get());
 //! // using `NZ` is fine for the same reason
-//! const ___NZ___INTERNAL___NUM___1___: u16
+//! const _NZ_INTERNAL_NUM_VALUE_1_: u16
 //!     = nz::u16!(NZ.get()).get();
-//! // using `___NZ___INTERNAL___NUM___1___` constant as the argument
+//! // using `_NZ_INTERNAL_NUM_VALUE_1_` constant as the argument
 //! // causes compile-time error in the code line below, because the
 //! // internal macro constant has the same identifier as the constant
 //! // specified in the macro argument
-//! const _: NonZeroU16 = nz::u16!(___NZ___INTERNAL___NUM___1___);
+//! const _: NonZeroU16 = nz::u16!(_NZ_INTERNAL_NUM_VALUE_1_);
 //! ```
 //!
 //! More concisely, the problem is:
@@ -175,11 +175,18 @@ macro_rules! gen_non_zero_macros {
 
 gen_non_zero_macros! {
     // The most outer constant after an `nz` macro expansion.
-    const ___NZ___INTERNAL___NUM___1___;
+    const _NZ_INTERNAL_NUM_VALUE_1_;
 
     /// The empty error that is only intended for showing in
     /// the compile-error message when the specified numeric
     /// macro argument fails the compile-time zero check.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// // this never type cannot be instantiated
+    /// use nz::ZeroIsInvalidForNonZero;
+    /// ```
     #[allow(clippy::exhaustive_enums)]
     type ZeroError = ZeroIsInvalidForNonZero;
 
@@ -196,7 +203,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@i8].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -246,10 +253,10 @@ gen_non_zero_macros! {
         /// let _ = nz::i8!(1 - 1);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: i8 = 1;
-        /// let _ = nz::i8!(___NZ___INTERNAL___NUM___1___ + 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: i8 = 1;
+        /// let _ = nz::i8!(_NZ_INTERNAL_NUM_VALUE_1_ + 1);
         /// ```
         #[macro_export]
         macro_rules! i8;
@@ -268,7 +275,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@i16].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -319,10 +326,10 @@ gen_non_zero_macros! {
         /// let _ = nz::i16!(0x0101 - 0x0101);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: i16 = 2;
-        /// let _ = nz::i16!(___NZ___INTERNAL___NUM___1___ - 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: i16 = 2;
+        /// let _ = nz::i16!(_NZ_INTERNAL_NUM_VALUE_1_ - 1);
         /// ```
         #[macro_export]
         macro_rules! i16;
@@ -341,7 +348,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@i32].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -392,10 +399,10 @@ gen_non_zero_macros! {
         /// let _ = nz::i32!(0xFFFF * 0x00);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: i32 = 3;
-        /// let _ = nz::i32!(___NZ___INTERNAL___NUM___1___);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: i32 = 3;
+        /// let _ = nz::i32!(_NZ_INTERNAL_NUM_VALUE_1_);
         /// ```
         #[macro_export]
         macro_rules! i32;
@@ -414,7 +421,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@i64].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -465,10 +472,10 @@ gen_non_zero_macros! {
         /// let _ = nz::i64!(0 | 0);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: i64 = 4;
-        /// let _ = nz::i64!(___NZ___INTERNAL___NUM___1___ + 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: i64 = 4;
+        /// let _ = nz::i64!(_NZ_INTERNAL_NUM_VALUE_1_ + 1);
         /// ```
         #[macro_export]
         macro_rules! i64;
@@ -487,7 +494,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@i128].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -538,10 +545,10 @@ gen_non_zero_macros! {
         /// let _ = nz::i128!(0b0000 << 4);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: i128 = 5;
-        /// let _ = nz::i128!(___NZ___INTERNAL___NUM___1___ - 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: i128 = 5;
+        /// let _ = nz::i128!(_NZ_INTERNAL_NUM_VALUE_1_ - 1);
         /// ```
         #[macro_export]
         macro_rules! i128;
@@ -560,7 +567,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@isize].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -611,10 +618,10 @@ gen_non_zero_macros! {
         /// let _ = nz::isize!(0 << 2);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: isize = 6;
-        /// let _ = nz::isize!(___NZ___INTERNAL___NUM___1___);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: isize = 6;
+        /// let _ = nz::isize!(_NZ_INTERNAL_NUM_VALUE_1_);
         /// ```
         #[macro_export]
         macro_rules! isize;
@@ -633,7 +640,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@u8].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -684,10 +691,10 @@ gen_non_zero_macros! {
         /// let _ = nz::u8!(!0xFF);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: u8 = 7;
-        /// let _ = nz::u8!(___NZ___INTERNAL___NUM___1___ + 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: u8 = 7;
+        /// let _ = nz::u8!(_NZ_INTERNAL_NUM_VALUE_1_ + 1);
         /// ```
         #[macro_export]
         macro_rules! u8;
@@ -706,7 +713,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@u16].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -757,10 +764,10 @@ gen_non_zero_macros! {
         /// let _ = nz::u16!((1 == 0) as u16);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: u16 = 8;
-        /// let _ = nz::u16!(___NZ___INTERNAL___NUM___1___ - 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: u16 = 8;
+        /// let _ = nz::u16!(_NZ_INTERNAL_NUM_VALUE_1_ - 1);
         /// ```
         #[macro_export]
         macro_rules! u16;
@@ -779,7 +786,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@u32].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -830,10 +837,10 @@ gen_non_zero_macros! {
         /// let _ = nz::u32!(30 % 5);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: u32 = 9;
-        /// let _ = nz::u32!(___NZ___INTERNAL___NUM___1___);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: u32 = 9;
+        /// let _ = nz::u32!(_NZ_INTERNAL_NUM_VALUE_1_);
         /// ```
         #[macro_export]
         macro_rules! u32;
@@ -852,7 +859,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@u64].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -903,10 +910,10 @@ gen_non_zero_macros! {
         /// let _ = nz::u64!(-0x01 + 0x01);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: u64 = 10;
-        /// let _ = nz::u64!(___NZ___INTERNAL___NUM___1___ + 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: u64 = 10;
+        /// let _ = nz::u64!(_NZ_INTERNAL_NUM_VALUE_1_ + 1);
         /// ```
         #[macro_export]
         macro_rules! u64;
@@ -925,7 +932,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@u128].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -976,10 +983,10 @@ gen_non_zero_macros! {
         /// let _ = nz::u128!(0 + 0);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: u128 = 11;
-        /// let _ = nz::u128!(___NZ___INTERNAL___NUM___1___ - 1);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: u128 = 11;
+        /// let _ = nz::u128!(_NZ_INTERNAL_NUM_VALUE_1_ - 1);
         /// ```
         #[macro_export]
         macro_rules! u128;
@@ -998,7 +1005,7 @@ gen_non_zero_macros! {
         ///
         /// * The argument is either zero or non-constant.
         /// * The argument cannot be evaluated to a non-zero [prim@usize].
-        /// * The argument contains the `___NZ___INTERNAL___NUM___1___` identifier.
+        /// * The argument contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier.
         ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
         ///
         /// # Examples
@@ -1049,10 +1056,10 @@ gen_non_zero_macros! {
         /// let _ = nz::usize!(0b0100 ^ 0b0100);
         /// ```
         ///
-        /// #### Constant argument that contains the `___NZ___INTERNAL___NUM___1___` identifier fails to compile
+        /// #### Constant argument that contains the `_NZ_INTERNAL_NUM_VALUE_1_` identifier fails to compile
         /// ```rust, compile_fail
-        /// const ___NZ___INTERNAL___NUM___1___: usize = 12;
-        /// let _ = nz::usize!(___NZ___INTERNAL___NUM___1___);
+        /// const _NZ_INTERNAL_NUM_VALUE_1_: usize = 12;
+        /// let _ = nz::usize!(_NZ_INTERNAL_NUM_VALUE_1_);
         /// ```
         #[macro_export]
         macro_rules! usize;

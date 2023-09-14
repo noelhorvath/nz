@@ -41,7 +41,7 @@
 //! | [`NonZeroU128`][`core::num::NonZeroU128`] | [`nz::u128!`][`crate::u128`] |
 //! | [`NonZeroUsize`][`core::num::NonZeroUsize`] | [`nz::usize!`][`crate::usize`] |
 //!
-//! ## Basic usage
+//! ## Usage
 //!
 //! ```rust
 //! use core::num::NonZeroU8;

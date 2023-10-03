@@ -8,7 +8,14 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ### Removed
 
-- `publish-crate` workflow (2023-09-14)
+- 2023-09-14
+    - `publish-crate` workflow
+
+### Changed
+
+- 2023-10-03
+  - recategorize `[0.2.0] - increase MSRV from 1.47.0 to 1.56.0` as non-breaking change
+    in `changelog.md`
 
 ## [0.3.0] - 2023-09-14
 
@@ -28,6 +35,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - put all types between backticks in `NonZero macros` section in `lib.rs`
 
 #### Breaking changes
+
 - rename inner macro const to comply with `non-upper-case-globals` lint
 
 ### Fixed
@@ -61,8 +69,6 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - merge `README.md` with crate documentation in `lib.rs`
 - include documentation for crate from `README.md`
 - update badges in `README.md`
-
-#### Breaking changes
 - increase `MSRV` from `1.47.0` to `1.56.0`
 
 ## [0.1.4] - 2023-07-29

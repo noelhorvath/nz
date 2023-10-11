@@ -4,18 +4,19 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
-## [Unreleased]
+## [0.3.1] - 2023-10-11
 
 ### Removed
 
-- 2023-09-14
-    - `publish-crate` workflow
+- `publish-crate` workflow
+- non-generated documentation for each generated macro
 
 ### Changed
 
-- 2023-10-03
-  - recategorize `[0.2.0] - increase MSRV from 1.47.0 to 1.56.0` as non-breaking change
-    in `changelog.md`
+- recategorize `[0.2.0] - increase MSRV from 1.47.0 to 1.56.0` as non-breaking change
+  in `changelog.md`
+- add documentation generation to `gen_non_zero_macros`
+
 
 ## [0.3.0] - 2023-09-14
 
@@ -134,7 +135,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
-[Unreleased]: https://github.com/noelhorvath/nz/compare/6218e0c...HEAD
+[0.3.1]: https://github.com/noelhorvath/nz/compare/6218e0c...HEAD
 [0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...6218e0c
 [0.2.2]: https://github.com/noelhorvath/nz/compare/452838d...6a7e28d
 [0.2.1]: https://github.com/noelhorvath/nz/compare/3e63b92...452838d

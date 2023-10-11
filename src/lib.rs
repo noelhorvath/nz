@@ -282,7 +282,6 @@ gen_non_zero_macros! {
         type Integer = i32;
         type NonZero = NonZeroI32;
 
-
         #[macro_export]
         macro_rules! i32;
     }
@@ -307,7 +306,6 @@ gen_non_zero_macros! {
         type Integer = isize;
         type NonZero = NonZeroIsize;
 
-
         #[macro_export]
         macro_rules! isize;
     }
@@ -324,7 +322,6 @@ gen_non_zero_macros! {
         type Integer = u16;
         type NonZero = NonZeroU16;
 
-
         #[macro_export]
         macro_rules! u16;
     }
@@ -340,7 +337,6 @@ gen_non_zero_macros! {
     core::num::NonZeroU64 => {
         type Integer = u64;
         type NonZero = NonZeroU64;
-
 
         #[macro_export]
         macro_rules! u64;

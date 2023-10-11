@@ -166,7 +166,7 @@ macro_rules! gen_non_zero_macros {
             /// Compilation error will occur in the following cases:
             ///
             /// * The argument is either zero or non-constant.
-            #[doc = concat!("The argument cannot be evaluated to a non-zero [prim@", stringify!($int_ty), "].")]
+            #[doc = concat!("The argument cannot be evaluated to a non-zero [`prim@", stringify!($int_ty), "`].")]
             #[doc = concat!("The argument contains the `", stringify!($zero_error), "` identifier.")]
             ///     * For more information, see [`Limitations: const hygene`][crate#const-hygiene].
             ///
@@ -185,7 +185,7 @@ macro_rules! gen_non_zero_macros {
             #[doc = concat!(" #### Creating `", stringify!($nz_ty_name), "` using constant value")]
             /// ```rust
             #[doc = concat!(" # use ", stringify!($nz_ty), ";")]
-            #[doc = concat!(" const NUM: ", stringify!($int_ty), "= 0b0111_1111;")]
+            #[doc = concat!(" const NUM: ", stringify!($int_ty), " = 0b0111_1111;")]
             #[doc = concat!(" const NZ: ", stringify!($nz_ty_name), " = nz::", stringify!($int_ty),"!(NUM);")]
             #[doc = concat!(" let nz = nz::", stringify!($int_ty), "!(NZ.get());")]
             /// # assert_eq!(NUM, nz.get());
@@ -208,7 +208,7 @@ macro_rules! gen_non_zero_macros {
             ///
             /// #### Non-constant expression fails to compile
             /// ```rust, compile_fail
-            /// // compiles if `add` function has `const` modifier
+            /// // compiles if `add` function has the `const` modifier
             #[doc = concat!(" fn add(a: ", stringify!($int_ty), ", b: ", stringify!($int_ty), ") -> ", stringify!($int_ty), " { a.wrapping_add(b) }")]
             #[doc = concat!(" let _ = nz::", stringify!($int_ty), "!(add(1, 1));")]
             /// ```

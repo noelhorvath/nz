@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ### Changed
 
-- reorder subsections in `[0.3.1]` (`changelog.md`)
+- reorder subsections in `0.3.1` (`changelog.md`)
 - prefix fully-qualified `NonZero` paths with `::`
 - correct/improve comments
 - crate-level documentation

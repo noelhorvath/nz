@@ -17,9 +17,9 @@
 [license]: https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge
 
 The `nz` crate provides a collection of macros that simplify the creation
-of non-zero numerics implemented in [`core::num`](https://doc.rust-lang.org/core/num/index.html).
-With these macros, you can easily generate constants of all the `NonZero`
-types using literals, constant values or expressions at compile time.
+of non-zero integers implemented in [`core::num`]. With these macros, you can easily generate constants of all the `NonZero-` prefixed types using literals, constant values or expressions at compile time.
+
+[`core::num`]: https://doc.rust-lang.org/core/num/index.html
 
 ## Changelog
 
@@ -30,10 +30,10 @@ All changes to `nz` crate are documented in [changelog.md](changelog.md).
 * No unsafe code
 * No dependencies
 * `no_std` compatible
-* Supports all `core::num::NonZero{Integer}` types
-* Compile-time evaluation and zero detection
+* Supports all non-zero types in `core::num`
+* Compile-time evaluation
 
-## `NonZero` macros
+## Macros
 
 | Type | Macro |
 |------|-------|
@@ -54,85 +54,52 @@ All changes to `nz` crate are documented in [changelog.md](changelog.md).
 
 ```rust
 use core::num::NonZeroU8;
-// A `NonZeroU8` type can be constructed by different types
-// of arguments when using the matching macro.
-// such argument can be a numeric literal
+// A `NonZero*` type can be constructed by different types of
+// arguments when using the matching `nz` macro.
+// Such argument can be an integer literal,
 const NZ_MIN: NonZeroU8 = nz::u8!(1);
 let nz_two = nz::u8!(2);
-// or a constant value
+// a constant value,
 const NZ_MAX: NonZeroU8 = nz::u8!(u8::MAX);
 const SIX: u8 = 6;
 let six = nz::u8!(SIX);
-// or even a constant expression
+// or even a constant expression.
 const RES: NonZeroU8 = nz::u8!({ 3 + 7 } - NZ_MIN.get());
-// non-constant expression results in a compile-time error
-// which is caused by `nz_two` in this case
-// const OUTPUT: NonZeroU8 = nz::u8!({ 3 + 7 } - nz_two.get());
 let res = nz::u8!((NZ_MIN.get() & NZ_MAX.get()) + 7);
 let five = nz::u8!({ const FIVE: u8 = 5; FIVE });
+// However, a non-constant expression results in a compile-time error.
+// const __ERR: NonZeroU8 = nz::u8!({ 3 + 7 } - nz_two.get());
 ```
-
 ## Limitations
 
-### const fn
+### Declarative macro hygiene
 
-Declarative macros, such as all the `nz` macros, cannot be used with
-constant function arguments since they are not considered constant
-values, as demonstrated in the code below.
+[Declarative macro] is not [hygienic] when it comes to [items].
+As a result, if the outermost [constant item] `_NZ_INTERNAL_NUM_VALUE_1_`
+is referenced in the macro argument, a [cyclic dependency error] occurs as
+shown in the below examples.
 
-```rust, compile_fail
-use core::num::NonZeroU64;
+#### Non-expanded
 
-const fn wrapping_add_nz(a: u64, b: NonZeroU64) -> NonZeroU64 {
-    // `a` and `b` is not constant which results
-    // in a compile-time error when passed to
-    // `nz::u64!` in an expression
-    nz::u64!(a.wrapping_add(b.get()))
-}
-let nz = wrapping_add_nz(2, nz::u64!(1));
+```rust
+const __ERR: NonZeroI8 = nz::i8!(_NZ_INTERNAL_NUM_VALUE_1_ + 0x2C);
+```
+#### Expanded
+
+```rust
+const _ERR: NonZeroI8 = {
+    const _NZ_INTERNAL_NUM_VALUE_1_: i8 = _NZ_INTERNAL_NUM_VALUE_1_ + 0x2C;
+    {
+        /* rest of the expanded code */
+    }
+};
 ```
 
-### const hygiene
-
-When constants are used in a declarative macro, specifically in the
-most outer scope where a constant can be declared, there is a possibility
-of cyclic dependency when an expression is expected as an argument and an
-outer constant is used within that expression. This *collision* can occur
-if any of the inner constants share the same identifier as the outer constant
-after the macro is expanded at compile-time. The code snippet below demonstrates
-this scenario.
-
-```rust, compile_fail
-use core::num::NonZeroU16;
-
-const NZ: NonZeroU16 = nz::u16!(0xA3FE);
-const CHECK_ZERO: NonZeroU16 = nz::u16!(777);
-// although `CHECK_ZERO` is used in `nz::u16!` macro, it will not result in
-// an error when a constant with the same name is passed as part
-// of a constant expression, because this inner macro constant is not
-// declared in the most outer scope
-const OK: NonZeroU16 = nz::u16!(CHECK_ZERO.get());
-// using `NZ` is fine for the same reason
-const _NZ_INTERNAL_NUM_VALUE_1_: u16
-    = nz::u16!(NZ.get()).get();
-// using `_NZ_INTERNAL_NUM_VALUE_1_` constant as the argument
-// causes compile-time error in the code line below, because the
-// internal macro constant has the same identifier as the constant
-// specified in the macro argument
-const _: NonZeroU16 = nz::u16!(_NZ_INTERNAL_NUM_VALUE_1_);
-```
-
-More concisely, the problem is:
-
-```rust, compile_fail
-const X: u8 = X;
-```
-
-This *collision* between the outer and inner constants results in a compile-time
-error[^cd_error], because the inner macro constant depends on itself, creating
-a cyclic dependency.
-
-[^cd_error]: [`[E0391]`](https://doc.rust-lang.org/error_codes/E0391.html),
+[Declarative macro]: https://doc.rust-lang.org/reference/macros-by-example.html
+[items]: https://doc.rust-lang.org/reference/items.html
+[hygienic]: https://danielkeep.github.io/tlborm/book/mbe-min-hygiene.html
+[constant item]: https://doc.rust-lang.org/reference/items/constant-items.html
+[cyclic dependency error]: https://doc.rust-lang.org/error_codes/E0391.html
 
 ## License
 

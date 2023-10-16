@@ -4,12 +4,29 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
-## [0.3.1] - 2023-10-11
+## [0.3.2] - 2023-10-16
+
+### Changed
+
+- reorder subsections in `[0.3.1]` (`changelog.md`)
+- prefix fully-qualified `NonZero` paths with `::`
+- correct/improve comments
+- crate-level documentation
+    - rewrite `Limitations` section
+    - sync `README.md` with crate-level doc in `lib.rs`
+    - improve example code in `Usage`
+    - update `Features` section
+    - rename `Non-Zero macros` section to `Macros`
+
+### Fixed
+
+- list under `Compilation errors` in generated macro documentation
 
 ### Removed
 
-- `publish-crate` workflow
-- non-generated documentation for each generated macro
+- unnecessary link after [`core::num`] in `lib.rs`
+
+## [0.3.1] - 2023-10-11
 
 ### Changed
 
@@ -17,6 +34,10 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
   in `changelog.md`
 - add documentation generation to `gen_non_zero_macros`
 
+### Removed
+
+- `publish-crate` workflow
+- non-generated documentation for each generated macro
 
 ## [0.3.0] - 2023-09-14
 
@@ -135,7 +156,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
-[0.3.1]: https://github.com/noelhorvath/nz/compare/6218e0c...HEAD
+[0.3.2]: https://github.com/noelhorvath/nz/compare/ac06516...HEAD
+[0.3.1]: https://github.com/noelhorvath/nz/compare/6218e0c...ac06516
 [0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...6218e0c
 [0.2.2]: https://github.com/noelhorvath/nz/compare/452838d...6a7e28d
 [0.2.1]: https://github.com/noelhorvath/nz/compare/3e63b92...452838d

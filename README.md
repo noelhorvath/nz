@@ -107,4 +107,4 @@ This library is distributed under the terms of either of the following licenses 
 
 - [MIT License](http://opensource.org/licenses/MIT)
 - [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
-- [Zlib License](http://www.apache.org/licenses/LICENSE-2.0)
+- [Zlib License](https://www.zlib.net/zlib_license.html)

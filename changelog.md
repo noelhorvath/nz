@@ -137,6 +137,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - improve badges in `README.md`
 
 #### Breaking changes
+
 - reduce possible const dependency cycles to minimal
 
 ## [0.1.2] - 2023-07-29

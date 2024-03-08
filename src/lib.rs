@@ -13,7 +13,7 @@
 //!
 //! The `nz` crate provides a collection of macros that simplify the creation
 //! of non-zero integers implemented in [`core::num`]. With these macros, you
-//! can easily generate constants of all the `NonZero-` prefixed types using
+//! can easily generate constants of all the `NonZero` prefixed types using
 //! literals, constant values or expressions at compile time.
 //!
 //! ## Changelog
@@ -145,7 +145,6 @@ macro_rules! gen_non_zero_macros {
             #[doc = concat!(" # use ", stringify!($nz_ty), ";")]
             #[doc = concat!(" const NZ: ", stringify!($nz_ty_name), " = nz::", stringify!($int_ty), "!(0x10);")]
             #[doc = concat!(" let nz = nz::", stringify!($int_ty), "!(27);")]
-            /// let nz = nz::i8!(27);
             /// # assert_eq!(27, nz.get());
             /// # assert_eq!(0x10, NZ.get());
             /// ```
@@ -196,7 +195,7 @@ macro_rules! gen_non_zero_macros {
                 ($int_expr:expr) => {{
                     const $const_id: $int_ty = $int_expr;
                     {
-                        // compile-time error occurs if `$const_id` is `0` => [_; 1] != [_; 0]
+                        // compile-time error occurs if `$const_id` is `0` -> [_; 1] != [_; 0]
                         const ZERO_CHECK: [$crate::$zero_error; ($const_id == 0) as usize] = [];
                         const NZ: $nz_ty = match <$nz_ty>::new($const_id) {
                             Some(non_zero) => non_zero,

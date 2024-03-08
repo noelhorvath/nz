@@ -4,6 +4,22 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [0.3.3] - 2024-03-08
+
+### Changed
+
+- use `->` instead of `=>` in comment when representing an arrow
+- remove unnecessary `-` after `NonZero` in crate documentation
+
+### Fixed
+
+- `Zlib license` link under `Licenses` section
+- grammar errors in `changelog.md`
+
+### Removed
+
+- `let nz = nz::i8!(27);` from the first macro example
+
 ## [0.3.2] - 2023-10-16
 
 ### Changed
@@ -73,7 +89,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 ### Changed
 
 - update crate description
-- directly include documenation instead of including from `README.md` in `lib.rs`
+- directly include documentation instead of including from `README.md` in `lib.rs`
 - make badges declaration more readable in `README.md`
 
 ## [0.2.1] - 2023-07-30
@@ -99,7 +115,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - update crate documentation
 - update `Limitations`
-- remove asserts commented asserts from exmaples in `README.md`
+- remove asserts commented asserts from examples in `README.md`
 
 ### Fixed
 
@@ -115,7 +131,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ### Changed
 
-- update documentation tests and exmaples
+- update documentation tests and examples
 - update crate description
 - synchronize crate documentation with `README.md`
 - improve badges in `README.md`
@@ -156,7 +172,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
-[0.3.2]: https://github.com/noelhorvath/nz/compare/ac06516...HEAD
+[0.3.3]: https://github.com/noelhorvath/nz/compare/1dc8a41...HEAD
+[0.3.2]: https://github.com/noelhorvath/nz/compare/ac06516...1dc8a41
 [0.3.1]: https://github.com/noelhorvath/nz/compare/6218e0c...ac06516
 [0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...6218e0c
 [0.2.2]: https://github.com/noelhorvath/nz/compare/452838d...6a7e28d

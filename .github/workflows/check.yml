@@ -1,31 +1,13 @@
-name: rust
+name: Check
 
 on:
   pull_request:
-    branches: [dev, main]
+    branches: [beta, main]
   push:
-    branches: [dev, main]
+    branches: [beta, main]
 
 jobs:
-  clippy:
-    name: Clippy
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - run: cargo clippy --all-features --verbose
-
-  doc:
-    name: Docs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - run: cargo doc --all-features --verbose
-
-  test:
-    name: Tests
+  check:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -41,8 +23,16 @@ jobs:
           - { rust: beta, os: windows-latest }
           - { rust: nightly, os: windows-latest }
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: ${{ matrix.rust }}
-      - run: cargo test --all-features --verbose
+          components: clippy
+      - name: Clippy
+        run: cargo clippy --all-features --verbose
+      - name: Lint docs
+        run: cargo doc --all-features --verbose
+      - name: Test
+        run: cargo test --all-features --verbose

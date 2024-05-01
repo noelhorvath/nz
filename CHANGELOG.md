@@ -6,11 +6,11 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [0.3.4] - 2024-05-01
 
-## Added
+### Added
 
 - New deploy workflow
 
-## Changed
+### Changed
 
 - Add new line after import in `Usage` example code
 - Capitalize link names under `<!-- Links -->` in `CHANGELOG.md`
@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - Update and improve `Check` workflow
 - Update links to versions in `CHANGELOG.md`
 
-## Fixed
+### Fixed
 
 - Use `1.56.0` version of rust API docs instead of `stable`
 - Deploy and check workflows

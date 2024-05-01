@@ -49,7 +49,6 @@
 //!
 //! ```rust
 //! use core::num::NonZeroU8;
-//!
 //! // A `NonZero*` type can be constructed by different types of
 //! // arguments when using the matching `nz` macro.
 //! // Such argument can be an integer literal,

@@ -38,9 +38,9 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: ${{ env.TOOLCHAIN }}
-      - name: Install cargo-release
-        run: cargo install cargo-release
       - name: Cargo login
         run: cargo login ${{ secrets.CRATES_IO_API_TOKEN }}
+      - name: Cargo dry run
+        run: cargo publish --dry-run
       - name: Cargo publish
-        run: cargo release publish --no-confirm --execute
+        run: cargo publish

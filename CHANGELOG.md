@@ -8,19 +8,20 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## Added
 
-- New release workflow
+- New deploy workflow
 
 ## Changed
 
 - Add new line after import in `Usage` example code
 - Capitalize link names under `<!-- Links -->` in `CHANGELOG.md`
 - Capitalize first latter of each list item in `CHANGELOG.md`
-- Rename `rust.yml` to `check.yml` in `.github/workflows`
+- Rename `rust.yml` to `check.yml` in `.github/workflows
 - Update and improve `Check` workflow
 
 ## Fixed
 
 - Use `1.56.0` version of rust API docs instead of `stable`
+- Deploy and check workflows
 
 ## [0.3.3] - 2024-03-08
 

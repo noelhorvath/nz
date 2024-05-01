@@ -20,6 +20,7 @@ jobs:
       - name: Create new release
         uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
           makeLatest: true
       - name: Update changelog
         uses: dropseed/changerelease@v1

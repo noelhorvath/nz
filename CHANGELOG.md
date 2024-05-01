@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - Capitalize first latter of each list item in `CHANGELOG.md`
 - Rename `rust.yml` to `check.yml` in `.github/workflows
 - Update and improve `Check` workflow
+- Update links to versions in `CHANGELOG.md`
 
 ## Fixed
 
@@ -192,16 +193,16 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
-[0.3.4]: https://github.com/noelhorvath/nz/compare/856def2...HEAD
-[0.3.3]: https://github.com/noelhorvath/nz/compare/1dc8a41...856def2
-[0.3.2]: https://github.com/noelhorvath/nz/compare/ac06516...1dc8a41
-[0.3.1]: https://github.com/noelhorvath/nz/compare/6218e0c...ac06516
-[0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...6218e0c
-[0.2.2]: https://github.com/noelhorvath/nz/compare/452838d...6a7e28d
-[0.2.1]: https://github.com/noelhorvath/nz/compare/3e63b92...452838d
-[0.2.0]: https://github.com/noelhorvath/nz/compare/1560ec0...3e63b92
-[0.1.4]: https://github.com/noelhorvath/nz/compare/ae37c3d...1560ec0
-[0.1.3]: https://github.com/noelhorvath/nz/compare/460d3f3...ae37c3d
-[0.1.2]: https://github.com/noelhorvath/nz/compare/0f080b9...460d3f3
-[0.1.1]: https://github.com/noelhorvath/nz/compare/b67c25a...0f080b9
-[0.1.0]: https://github.com/noelhorvath/nz/compare/b165aa5...b67c25a
+[0.3.4]: https://github.com/noelhorvath/nz/compare/v0.3.3...v0.3.4
+[0.3.3]: https://github.com/noelhorvath/nz/compare/v0.3.2...v0.3.3
+[0.3.2]: https://github.com/noelhorvath/nz/compare/v0.3.1...v0.3.2
+[0.3.1]: https://github.com/noelhorvath/nz/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/noelhorvath/nz/compare/v0.2.2...v0.3.0
+[0.2.2]: https://github.com/noelhorvath/nz/compare/v0.2.1...v0.2.2
+[0.2.1]: https://github.com/noelhorvath/nz/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/noelhorvath/nz/compare/v0.1.4...v0.2.0
+[0.1.4]: https://github.com/noelhorvath/nz/compare/v0.1.3...v0.1.4
+[0.1.3]: https://github.com/noelhorvath/nz/compare/v0.1.2...v0.1.3
+[0.1.2]: https://github.com/noelhorvath/nz/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/noelhorvath/nz/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/noelhorvath/nz/compare/b165aa5...v0.1.0

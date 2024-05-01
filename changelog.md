@@ -4,17 +4,35 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [0.3.4] - 2024-05-01
+
+## Added
+
+- New release workflow
+
+## Changed
+
+- Add new line after import in `Usage` example code
+- Capitalize link names under `<!-- Links -->` in `CHANGELOG.md`
+- Capitalize first latter of each list item in `CHANGELOG.md`
+- Rename `rust.yml` to `check.yml` in `.github/workflows`
+- Update and improve `Check` workflow
+
+## Fixed
+
+- Use `1.56.0` version of rust API docs instead of `stable`
+
 ## [0.3.3] - 2024-03-08
 
 ### Changed
 
-- use `->` instead of `=>` in comment when representing an arrow
-- remove unnecessary `-` after `NonZero` in crate documentation
+- Use `->` instead of `=>` in comment when representing an arrow
+- Remove unnecessary `-` after `NonZero` in crate documentation
 
 ### Fixed
 
 - `Zlib license` link under `Licenses` section
-- grammar errors in `changelog.md`
+- Grammar errors in `changelog.md`
 
 ### Removed
 
@@ -24,156 +42,157 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ### Changed
 
-- reorder subsections in `0.3.1` (`changelog.md`)
-- prefix fully-qualified `NonZero` paths with `::`
-- correct/improve comments
-- crate-level documentation
-    - rewrite `Limitations` section
-    - sync `README.md` with crate-level doc in `lib.rs`
-    - improve example code in `Usage`
-    - update `Features` section
-    - rename `Non-Zero macros` section to `Macros`
+- Reorder subsections in `0.3.1` (`changelog.md`)
+- Prefix fully-qualified `NonZero` paths with `::`
+- Correct/improve comments
+- Crate-level documentation
+    - Rewrite `Limitations` section
+    - Sync `README.md` with crate-level doc in `lib.rs`
+    - Improve example code in `Usage`
+    - Update `Features` section
+    - Rename `Non-Zero macros` section to `Macros`
 
 ### Fixed
 
-- list under `Compilation errors` in generated macro documentation
+- List under `Compilation errors` in generated macro documentation
 
 ### Removed
 
-- unnecessary link after [`core::num`] in `lib.rs`
+- Unnecessary link after [`core::num`] in `lib.rs`
 
 ## [0.3.1] - 2023-10-11
 
 ### Changed
 
-- recategorize `[0.2.0] - increase MSRV from 1.47.0 to 1.56.0` as non-breaking change
+- Recategorize `[0.2.0] - increase MSRV from 1.47.0 to 1.56.0` as non-breaking change
   in `changelog.md`
-- add documentation generation to `gen_non_zero_macros`
+- Add documentation generation to `gen_non_zero_macros`
 
 ### Removed
 
 - `publish-crate` workflow
-- non-generated documentation for each generated macro
+- Non-generated documentation for each generated macro
 
 ## [0.3.0] - 2023-09-14
 
 ### Added
 
-- configure rust toolchain in `rust-toolchain.toml`
+- Configure rust toolchain in `rust-toolchain.toml`
 - `publish-crate` workflow for publishing crate
 - `Changelog` section with link to `changelog.md`
-- add dummy example for `ZeroIsInvalidForNonZero` never type
+- Add dummy example for `ZeroIsInvalidForNonZero` never type
 
 ### Changed
 
-- rename `Basic usage` section to `Usage` in both `README.md` and `lib.rs`
-- remove trailing `.` from crate description
-- update `rust` workflow
-- update old macro const name to new in docs and comments
-- put all types between backticks in `NonZero macros` section in `lib.rs`
+- Rename `Basic usage` section to `Usage` in both `README.md` and `lib.rs`
+- Remove trailing `.` from crate description
+- Update `rust` workflow
+- Update old macro const name to new in docs and comments
+- Put all types between backticks in `NonZero macros` section in `lib.rs`
 
 #### Breaking changes
 
-- rename inner macro const to comply with `non-upper-case-globals` lint
+- Rename inner macro const to comply with `non-upper-case-globals` lint
 
 ### Fixed
 
-- correct repository link for `github` badge
-- correct link to `rust` workflow for `rust-ci` badge
+- Correct repository link for `github` badge
+- Correct link to `rust` workflow for `rust-ci` badge
 - `license` badge in `README.md`
-- comply with all doc lints
-- comply with `non-upper-case-globals` warning
+- Comply with all doc lints
+- Comply with `non-upper-case-globals` warning
 
 ## [0.2.2] - 2023-07-30
 
 ### Changed
 
-- update crate description
-- directly include documentation instead of including from `README.md` in `lib.rs`
-- make badges declaration more readable in `README.md`
+- Update crate description
+- Directly include documentation instead of including from `README.md` in `lib.rs`
+- Make badges declaration more readable in `README.md`
 
 ## [0.2.1] - 2023-07-30
 
 ### Fixed
 
-- correct typos in each macro documentation
+- Correct typos in each macro documentation
 
 ## [0.2.0] - 2023-07-30
 
 ### Changed
 
-- bump rust edition from `2018` to `2021`
-- change `MSRV` for `test` job in `rust.yml`
-- merge `README.md` with crate documentation in `lib.rs`
-- include documentation for crate from `README.md`
-- update badges in `README.md`
-- increase `MSRV` from `1.47.0` to `1.56.0`
+- Bump rust edition from `2018` to `2021`
+- Change `MSRV` for `test` job in `rust.yml`
+- Merge `README.md` with crate documentation in `lib.rs`
+- Include documentation for crate from `README.md`
+- Update badges in `README.md`
+- Increase `MSRV` from `1.47.0` to `1.56.0`
 
 ## [0.1.4] - 2023-07-29
 
 ### Changed
 
-- update crate documentation
-- update `Limitations`
-- remove asserts commented asserts from examples in `README.md`
+- Update crate documentation
+- Update `Limitations`
+- Remove asserts commented asserts from examples in `README.md`
 
 ### Fixed
 
-- correct code comments in `Basic usage`
-- correct `doc.rs` links to macro types in `Macros` section in `README.md`
+- Correct code comments in `Basic usage`
+- Correct `doc.rs` links to macro types in `Macros` section in `README.md`
 
 ## [0.1.3] - 2023-07-29
 
 ### Added
 
 - `Limitations` in documentation and `README.md`
-- new documentation tests and examples
+- New documentation tests and examples
 
 ### Changed
 
-- update documentation tests and examples
-- update crate description
-- synchronize crate documentation with `README.md`
-- improve badges in `README.md`
+- Update documentation tests and examples
+- Update crate description
+- Synchronize crate documentation with `README.md`
+- Improve badges in `README.md`
 
 #### Breaking changes
 
-- reduce possible const dependency cycles to minimal
+- Reduce possible const dependency cycles to minimal
 
 ## [0.1.2] - 2023-07-29
 
 ### Added
 
-- improve `README.md`
-    - add `rust` GitHub workflow badge
-    - add `docs.rs` badge
-    - add `crates.io` badge
-    - add `unsafety` badge
-    - add `license` badge
-    - add link to `core::num` references
+- Improve `README.md`
+    - Add `rust` GitHub workflow badge
+    - Add `docs.rs` badge
+    - Add `crates.io` badge
+    - Add `unsafety` badge
+    - Add `license` badge
+    - Add link to `core::num` references
 
 ### Changed
 
-- update `README.md`
-    - correct sentence in `REMARKS` section
+- Update `README.md`
+    - Correct sentence in `REMARKS` section
 
 ## [0.1.1] - 2023-07-29
 
 ### Changed
 
-- update `Cargo.toml`
-    - rename category name `no_std` to `no-std`
+- Update `Cargo.toml`
+    - Rename category name `no_std` to `no-std`
 
 ## [0.1.0] - 2023-07-29
 
-- initial release
+- Initial release
 
 <!-- Links -->
-[keep a changelog]: https://keepachangelog.com/en/1.0.0/
-[semantic versioning]: https://semver.org/spec/v2.0.0.html
+[Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
+[Semantic Versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
-[0.3.3]: https://github.com/noelhorvath/nz/compare/1dc8a41...HEAD
+[0.3.4]: https://github.com/noelhorvath/nz/compare/856def2...HEAD
+[0.3.3]: https://github.com/noelhorvath/nz/compare/1dc8a41...856def2
 [0.3.2]: https://github.com/noelhorvath/nz/compare/ac06516...1dc8a41
 [0.3.1]: https://github.com/noelhorvath/nz/compare/6218e0c...ac06516
 [0.3.0]: https://github.com/noelhorvath/nz/compare/6a7e28d...6218e0c

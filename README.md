@@ -9,7 +9,7 @@
 
 [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
 [crates.io]: https://img.shields.io/crates/v/nz?style=for-the-badge&logo=rust
-[docs.rs]: https://img.shields.io/docsrs/nz/0.4.0-beta.0?style=for-the-badge&logo=docs.rs
+[docs.rs]: https://img.shields.io/docsrs/nz/0.4.0-beta.1?style=for-the-badge&logo=docs.rs
 [rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/check.yml?branch=0.4.0-beta&style=for-the-badge&logo=github
 [unsafety]: https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge&logo=rust
 [license]: https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge

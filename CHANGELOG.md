@@ -4,6 +4,12 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [Unreleased] - ???
+
+## Fixed
+
+- Correct `doc.rs` badge version to latest beta
+
 ## [0.4.0-beta.1] - 2024-05-02
 
 ### Fixed

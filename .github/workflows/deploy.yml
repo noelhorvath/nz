@@ -3,28 +3,12 @@ name: Create release
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
+
+env:
+  TOOLCHAIN: stable
 
 jobs:
-  set-toolchain:
-    name: Set TOOLCHAIN
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check if tag matches pattern
-        id: tag_check
-        run: |
-          if [[ ${{ github.ref }} ~= grep -q -E '.*v[0-9]+\.[0-9]+\.[0-9]+$' ]]; then
-            echo "IS_STABLE_VERSION=true" >> $GITHUB_OUTPUT
-          else
-            echo "IS_STABLE_VERSION=false" >> $GITHUB_OUTPUT
-          fi
-      - name: Set TOOLCHAIN to stable if stable tag
-        if: steps.tag_check.outputs.IS_STABLE_VERSION
-        run: echo "TOOLCHAIN=stable" >> $GITHUB_ENV
-      - name: Set TOOLCHAIN to nightly if unstable tag
-        if: steps.tag_check.outputs.IS_STABLE_VERSION != true
-        run: echo "TOOLCHAIN=stable" >> $GITHUB_ENV
-
   release:
     name: Create new release
     permissions:

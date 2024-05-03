@@ -1,12 +1,12 @@
 //! # nz
 //!
 //! [![github]](https://github.com/noelhorvath/zn)
-//! [![crates.io]](https://crates.io/crates/nz)
-//! [![docs.rs]](https://docs.rs/nz)
+//! [![crates.io]](https://crates.io/crates/nz/0.4.0-beta.1)
+//! [![docs.rs]](https://docs.rs/nz/0.4.0-beta.1/nz)
 //!
 //! [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
 //! [crates.io]: https://img.shields.io/crates/v/nz?style=for-the-badge&logo=rust
-//! [docs.rs]: https://img.shields.io/docsrs/nz/latest?style=for-the-badge&logo=docs.rs
+//! [docs.rs]: https://img.shields.io/docsrs/nz/0.4.0-beta.1?style=for-the-badge&logo=docs.rs
 //!
 //! The `nz` crate provides a collection of macros that simplify the creation
 //! of the [`NonZero`][`core::num::NonZero`] type. With these macros, you

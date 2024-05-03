@@ -1,4 +1,3 @@
 [toolchain]
-channel = "1.56.0"
-components = ["clippy"]
-profile = "minimal"
+channel = "nightly"
+profile = "default"

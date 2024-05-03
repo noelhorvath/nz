@@ -1,13 +1,13 @@
 //! # nz
 //!
 //! [![github]](https://github.com/noelhorvath/zn)
-//! [![crates.io]](https://crates.io/crates/nz)
-//! [![docs.rs]](https://docs.rs/nz)
+//! [![crates.io]](https://crates.io/crates/nz/0.3.5)
+//! [![docs.rs]](https://docs.rs/nz/0.3.5/nz)
 //! [![msrv]](https://releases.rs/docs/1.56.0/)
 //!
 //! [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
 //! [crates.io]: https://img.shields.io/crates/v/nz?style=for-the-badge&logo=rust
-//! [docs.rs]: https://img.shields.io/docsrs/nz/latest?style=for-the-badge&logo=docs.rs
+//! [docs.rs]: https://img.shields.io/docsrs/nz/0.3.5?style=for-the-badge&logo=docs.rs
 //! [msrv]: https://img.shields.io/badge/MSRV-1.56.0-F21D1D?style=for-the-badge&logo=rust
 //!
 //!

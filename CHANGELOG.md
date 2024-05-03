@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - Update generated macro doc
 - Update internal macro syntax
 - Update toolchain channel to `nigthly` from `1.56.0` in `rust-toolchain.toml`
+- Update `Check` workflow
 - Use `panic!` instead of static assertion
 - Use stabilized generic `NonZero`
 

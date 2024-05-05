@@ -1,15 +1,15 @@
 # nz
 
 [![github]](https://github.com/noelhorvath/nz)
-[![crates.io]](https://crates.io/crates/nz/0.4.0-beta.1)
-[![docs.rs]](https://docs.rs/nz/0.4.0-beta.1/nz)
+[![crates.io]](https://crates.io/crates/nz/0.4.0-beta.2)
+[![docs.rs]](https://docs.rs/nz/0.4.0-beta.2/nz)
 [![rust-ci]](https://github.com/noelhorvath/nz/actions?query=branch%3A0.4.0-beta)
 ![unsafety]
 [![license]](#license)
 
 [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
-[crates.io]: https://img.shields.io/crates/v/nz?style=for-the-badge&logo=rust
-[docs.rs]: https://img.shields.io/docsrs/nz/0.4.0-beta.1?style=for-the-badge&logo=docs.rs
+[crates.io]: https://img.shields.io/badge/crates.io-0.4.0--beta.2-orange?style=for-the-badge&logo=rust
+[docs.rs]: https://img.shields.io/docsrs/nz/0.4.0-beta.2?style=for-the-badge&logo=docs.rs
 [rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/check.yml?branch=0.4.0-beta&style=for-the-badge&logo=github
 [unsafety]: https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge&logo=rust
 [license]: https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge
@@ -40,7 +40,7 @@ features that require the `nightly` toolchain until they are both included
 in a future stable release.
 
 [`inline_const`]: https://doc.rust-lang.org/unstable-book/language-features/inline-const.html?highlight=inline#inline_const
-[`generic_nonzero`]: https://doc.rust-lang.org/nightly/unstable-book library-features/generic-nonzero.html
+[`generic_nonzero`]: https://doc.rust-lang.org/stable/unstable-book/library-features/generic-nonzero.html
 
 ## Changelog
 

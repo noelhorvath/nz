@@ -1,26 +1,17 @@
 //! # nz
 //!
 //! [![github]](https://github.com/noelhorvath/zn)
-//! [![crates.io]](https://crates.io/crates/nz/0.4.0-beta.2)
-//! [![docs.rs]](https://docs.rs/nz/0.4.0-beta.2/nz)
+//! [![crates.io]](https://crates.io/crates/nz/0.4.0)
+//! [![docs.rs]](https://docs.rs/nz/0.4.0/nz)
 //!
 //! [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
-//! [crates.io]: https://img.shields.io/badge/crates.io-0.4.0--beta.2-orange?style=for-the-badge&logo=rust
-//! [docs.rs]: https://img.shields.io/docsrs/nz/0.4.0-beta.2?style=for-the-badge&logo=docs.rs
+//! [crates.io]: https://img.shields.io/badge/crates.io-0.4.0-orange?style=for-the-badge&logo=rust
+//! [docs.rs]: https://img.shields.io/docsrs/nz/0.4.0?style=for-the-badge&logo=docs.rs
 //!
 //! The `nz` crate provides a collection of macros that simplify the creation
 //! of the [`NonZero`][`core::num::NonZero`] type. With these macros, you
 //! can easily generate constants of the generic type using literals, constant
 //! values or expressions at compile time.
-//!
-//! ## Disclaimer
-//!
-//! This beta version of `nz` uses the [`inline_const`] and [`generic_nonzero`]
-//! features that require the `nightly` toolchain until they are both included
-//! in a future stable release.
-//!
-//! [`inline_const`]: https://doc.rust-lang.org/unstable-book/language-features/inline-const.html?highlight=inline#inline_const
-//! [`generic_nonzero`]: https://doc.rust-lang.org/stable/unstable-book/library-features/generic-nonzero.html
 //!
 //! ## Changelog
 //!

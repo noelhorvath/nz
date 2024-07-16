@@ -10,10 +10,9 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Correct comment in `lib.rs`
 - Update description and version in `Cargo.toml`
-- Update `README.md`
-    - Correct `Features` section
-    - Update versions in links
-    - Remove `Disclaimer` section
+- Correct `Features` section in `README.md`
+- Remove `Disclaimer` section in `README.md`
+- Update versions in links (`README.md` & `lib.rs`)
 - Switch to `stable` toolchain in `rust-toolchain.toml`
 
 ## [0.4.0-beta.2] - 2024-05-05
@@ -65,6 +64,13 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - Limitation related example from generated doc
 - `MSRV` in beta version
 - `ZeroError` type
+
+## [0.3.5] - 2024-05-02
+
+### Fixed
+
+- Use crate version in `create.io` and `doc.rs` badges
+- Use `main` branch in `CI` badge
 
 ## [0.3.4] - 2024-05-01
 
@@ -259,6 +265,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [0.4.0-beta.2]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.1...v0.4.0-beta.2
 [0.4.0-beta.1]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.0...v0.4.0-beta.1
 [0.4.0-beta.0]: https://github.com/noelhorvath/nz/compare/v0.3.4...v0.4.0-beta.0
+[0.3.5]: https://github.com/noelhorvath/nz/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/noelhorvath/nz/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/noelhorvath/nz/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/noelhorvath/nz/compare/v0.3.1...v0.3.2

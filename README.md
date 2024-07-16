@@ -1,16 +1,16 @@
 # nz
 
 [![github]](https://github.com/noelhorvath/nz)
-[![crates.io]](https://crates.io/crates/nz/0.4.0-beta.2)
-[![docs.rs]](https://docs.rs/nz/0.4.0-beta.2/nz)
-[![rust-ci]](https://github.com/noelhorvath/nz/actions?query=branch%3A0.4.0-beta)
+[![crates.io]](https://crates.io/crates/nz/0.4.0)
+[![docs.rs]](https://docs.rs/nz/0.4.0/nz)
+[![rust-ci]](https://github.com/noelhorvath/nz/actions?query=branch%3A0.4.0)
 ![unsafety]
 [![license]](#license)
 
 [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
-[crates.io]: https://img.shields.io/badge/crates.io-0.4.0--beta.2-orange?style=for-the-badge&logo=rust
-[docs.rs]: https://img.shields.io/docsrs/nz/0.4.0-beta.2?style=for-the-badge&logo=docs.rs
-[rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/check.yml?branch=0.4.0-beta&style=for-the-badge&logo=github
+[crates.io]: https://img.shields.io/badge/crates.io-0.4.0-orange?style=for-the-badge&logo=rust
+[docs.rs]: https://img.shields.io/docsrs/nz/0.4.0?style=for-the-badge&logo=docs.rs
+[rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/check.yml?branch=0.4.0&style=for-the-badge&logo=github
 [unsafety]: https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge&logo=rust
 [license]: https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge
 
@@ -31,16 +31,7 @@ of the [`NonZero`] type. With these macros, you can easily generate constants
 of the generic type using literals, constant values or expressions at
 compiletime.
 
-[`NonZero`]: https://doc.rust-lang.org/nightly/core/num/struct.NonZero.html
-
-## Disclaimer
-
-This beta version of `nz` uses the [`inline_const`] and [`generic_nonzero`]
-features that require the `nightly` toolchain until they are both included
-in a future stable release.
-
-[`inline_const`]: https://doc.rust-lang.org/unstable-book/language-features/inline-const.html?highlight=inline#inline_const
-[`generic_nonzero`]: https://doc.rust-lang.org/stable/unstable-book/library-features/generic-nonzero.html
+[`NonZero`]: https://doc.rust-lang.org/1.79.0/core/num/struct.NonZero.html
 
 ## Changelog
 
@@ -51,27 +42,27 @@ All changes to `nz` crate are documented in [CHANGELOG.md](changelog.md).
 * No unsafe code
 * No dependencies
 * `no_std` compatible
-* Supports every type that implements the [`ZeroablePrimitive`] marker trait
+* Supports every type that implements [`ZeroablePrimitive`]
 * Compile-time evaluation
 
-[`ZeroablePrimitive`]: https://doc.rust-lang.org/nightly/core/num/trait.ZeroablePrimitive.html
+[`ZeroablePrimitive`]: https://doc.rust-lang.org/1.79.0/core/num/trait.ZeroablePrimitive.html
 
 ## Macros
 
 | Type | Macro |
 |------|-------|
-| [`NonZero<i8>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroI8.html) | [`nz::i8!`](https://docs.rs/nz/latest/nz/macro.i8.html) |
-| [`NonZero<i16>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroI16.html) | [`nz::i16!`](https://docs.rs/nz/latest/nz/macro.i16.html) |
-| [`NonZero<i32>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroI32.html) | [`nz::i32!`](https://docs.rs/nz/latest/nz/macro.i32.html) |
-| [`NonZero<i64>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroI16.html) | [`nz::i64!`](https://docs.rs/nz/latest/nz/macro.i64.html) |
-| [`NonZero<i128>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroI128.html) | [`nz::i128!`](https://docs.rs/nz/latest/nz/macro.i128.html) |
-| [`NonZero<isize>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroIsize.html) | [`nz::isize!`](https://docs.rs/nz/latest/nz/macro.isize.html) |
-| [`NonZero<u8>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroU8.html) | [`nz::u8!`](https://docs.rs/nz/latest/nz/macro.u8.html) |
-| [`NonZero<u16>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroU16.html) | [`nz::u16!`](https://docs.rs/nz/latest/nz/macro.u16.html) |
-| [`NonZero<u32>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroU32.html) | [`nz::u32!`](https://docs.rs/nz/latest/nz/macro.u32.html) |
-| [`NonZero<u64>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroU64.html) | [`nz::u64!`](https://docs.rs/nz/latest/nz/macro.u64.html) |
-| [`NonZero<u128>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroU128.html) | [`nz::u128!`](https://docs.rs/nz/latest/nz/macro.u128.html) |
-| [`NonZero<usize>`](https://doc.rust-lang.org/nightly/core/num/type.NonZeroUsize.html) | [`nz::usize!`](https://docs.rs/nz/latest/nz/macro.usize.html) |
+| [`NonZero<i8>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroI8.html) | [`nz::i8!`](https://docs.rs/nz/0.4.0/nz/macro.i8.html) |
+| [`NonZero<i16>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroI16.html) | [`nz::i16!`](https://docs.rs/nz/0.4.0/nz/macro.i16.html) |
+| [`NonZero<i32>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroI32.html) | [`nz::i32!`](https://docs.rs/nz/0.4.0/nz/macro.i32.html) |
+| [`NonZero<i64>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroI16.html) | [`nz::i64!`](https://docs.rs/nz/0.4.0/nz/macro.i64.html) |
+| [`NonZero<i128>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroI128.html) | [`nz::i128!`](https://docs.rs/nz/0.4.0/nz/macro.i128.html) |
+| [`NonZero<isize>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroIsize.html) | [`nz::isize!`](https://docs.rs/nz/0.4.0/nz/macro.isize.html) |
+| [`NonZero<u8>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroU8.html) | [`nz::u8!`](https://docs.rs/nz/0.4.0/nz/macro.u8.html) |
+| [`NonZero<u16>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroU16.html) | [`nz::u16!`](https://docs.rs/nz/0.4.0/nz/macro.u16.html) |
+| [`NonZero<u32>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroU32.html) | [`nz::u32!`](https://docs.rs/nz/0.4.0/nz/macro.u32.html) |
+| [`NonZero<u64>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroU64.html) | [`nz::u64!`](https://docs.rs/nz/0.4.0/nz/macro.u64.html) |
+| [`NonZero<u128>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroU128.html) | [`nz::u128!`](https://docs.rs/nz/0.4.0/nz/macro.u128.html) |
+| [`NonZero<usize>`](https://doc.rust-lang.org/1.79.0/core/num/type.NonZeroUsize.html) | [`nz::usize!`](https://docs.rs/nz/0.4.0/nz/macro.usize.html) |
 
 ## Usage
 

@@ -1,13 +1,13 @@
 //! # nz
 //!
 //! [![github]](https://github.com/noelhorvath/zn)
-//! [![crates.io]](https://crates.io/crates/nz/0.4.0)
-//! [![docs.rs]](https://docs.rs/nz/0.4.0/nz)
+//! [![crates.io]](https://crates.io/crates/nz/0.4.1)
+//! [![docs.rs]](https://docs.rs/nz/0.4.1/nz)
 //! [![msrv]](https://releases.rs/docs/1.79.0/)
 //!
 //! [github]: https://img.shields.io/badge/github-8da0cb?style=for-the-badge&logo=github
-//! [crates.io]: https://img.shields.io/badge/crates.io-0.4.0-orange?style=for-the-badge&logo=rust
-//! [docs.rs]: https://img.shields.io/docsrs/nz/0.4.0?style=for-the-badge&logo=docs.rs
+//! [crates.io]: https://img.shields.io/badge/crates.io-0.4.1-orange?style=for-the-badge&logo=rust
+//! [docs.rs]: https://img.shields.io/docsrs/nz/0.4.1?style=for-the-badge&logo=docs.rs
 //! [msrv]: https://img.shields.io/badge/MSRV-1.79.0-F21D1D?style=for-the-badge&logo=rust
 //!
 //! The `nz` crate provides a collection of macros that simplify the creation
@@ -139,7 +139,7 @@ macro_rules! gen_nz_macro {
                 const {{
                     match core::num::NonZero::<$int_type>::new($int_expr) {
                         Some(non_zero) => non_zero,
-                        None => panic!("expected non-zero value"),
+                        None => panic!("expected a non-zero value"),
                     }
                 }}
             }};

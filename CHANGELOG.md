@@ -4,6 +4,13 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [0.4.1] - 2024-07-16
+
+# Fixed
+
+- Correct panic message in `lib.rs`
+- Remove assertion line from exmaple in `README.md`
+
 ## [0.4.0] - 2024-07-16
 
 ## Added

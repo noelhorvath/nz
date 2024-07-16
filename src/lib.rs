@@ -154,7 +154,7 @@ macro_rules! gen_nz_macro {
     };
 }
 
-/// Generates a non-zero macro for each argument.
+/// Generates a non-zero macro from each identifier.
 macro_rules! gen_nz_macros {
     ($($int_type:ident), *) => {
         $(gen_nz_macro!($int_type);)*

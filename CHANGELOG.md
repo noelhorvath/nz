@@ -4,6 +4,73 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [0.4.0] - 2024-07-16
+
+## Added
+
+- Set `rust-version` (`MSRV`) to `1.79.0` in `Cargo.toml`
+- Set `edition` to `2021` in `Cargo.toml`
+- Old `MSRV` badges back to `lib.rs` and `README.md`
+
+## Changed
+
+- Correct comment in `lib.rs`
+- Update description and version in `Cargo.toml`
+- Correct `Features` section in `README.md`
+- Remove `Disclaimer` section in `README.md`
+- Update versions in links (`README.md` & `lib.rs`)
+- Switch to `stable` toolchain in `rust-toolchain.toml`
+
+## [0.4.0-beta.2] - 2024-05-05
+
+## Changed
+
+- Use new `crates.io` badge and show crate version
+
+## Fixed
+
+- Correct `doc.rs` badge version to latest beta
+- Link of `generic-nonzero` in `README.md`
+
+## [0.4.0-beta.1] - 2024-05-02
+
+### Fixed
+
+- Use pre-release crate version in `create.io` and `doc.rs` badges
+- Use `0.4.0-beta` branch in `CI` badge
+
+## [0.4.0-beta.0] - 2024-05-03
+
+### Added
+
+- New internal `gen_nz_macro` macro
+- `Disclaimer` section to `lib.rs` and `README.MD`
+- Specify formatting rules in `rustfmt.toml`
+
+### Changed
+
+- Call `gen_nz_macro` in `gen_nz_macros`
+- Update create description
+- Update documentation in `README.md` and `lib.rs`
+- Update generated macro doc
+- Update internal macro syntax
+- Update toolchain channel to `nigthly` from `1.56.0` in `rust-toolchain.toml`
+- Update `Check` workflow
+- Use `panic!` instead of static assertion
+- Use stabilized generic `NonZero`
+
+#### Breaking changes
+
+- Use inline constant expression instead of temporary inner constants
+
+### Removed
+
+- `Compilation errors` section from genreated doc
+- `Limitations` section from `README.md` and create-level doc
+- Limitation related example from generated doc
+- `MSRV` in beta version
+- `ZeroError` type
+
 ## [0.3.5] - 2024-05-02
 
 ### Fixed
@@ -21,7 +88,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Add new line after import in `Usage` example code
 - Capitalize link names under `<!-- Links -->` in `CHANGELOG.md`
-- Capitalize first latter of each list item in `CHANGELOG.md`
+- Capitalize first letter of each list item in `CHANGELOG.md`
 - Rename `rust.yml` to `check.yml` in `.github/workflows
 - Update and improve `Check` workflow
 - Update links to versions in `CHANGELOG.md`
@@ -200,6 +267,10 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
+[0.4.0]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.1...v0.4.0
+[0.4.0-beta.2]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.1...v0.4.0-beta.2
+[0.4.0-beta.1]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.0...v0.4.0-beta.1
+[0.4.0-beta.0]: https://github.com/noelhorvath/nz/compare/v0.3.4...v0.4.0-beta.0
 [0.3.5]: https://github.com/noelhorvath/nz/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/noelhorvath/nz/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/noelhorvath/nz/compare/v0.3.2...v0.3.3

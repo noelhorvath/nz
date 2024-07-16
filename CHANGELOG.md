@@ -6,9 +6,14 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [0.4.0] - 2024-07-16
 
+## Added
+
+- Set `rust-version` (`MSRV`) to `1.79.0` in `Cargo.toml`
+- Set `edition` to `2021` in `Cargo.toml`
+- Old `MSRV` badges back to `lib.rs` and `README.md`
+
 ## Changed
 
-- Add `MSRV` back and set it to `1.78.0`
 - Correct comment in `lib.rs`
 - Update description and version in `Cargo.toml`
 - Correct `Features` section in `README.md`

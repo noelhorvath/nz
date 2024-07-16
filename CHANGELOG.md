@@ -4,6 +4,18 @@ All notable changes to `nz` crate will be documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [0.4.0] - 2024-07-16
+
+## Changed
+
+- Correct comment in `lib.rs`
+- Update description and version in `Cargo.toml`
+- Update `README.md`
+    - Correct `Features` section
+    - Update versions in links
+    - Remove `Disclaimer` section
+- Switch to `stable` toolchain in `rust-toolchain.toml`
+
 ## [0.4.0-beta.2] - 2024-05-05
 
 ## Changed
@@ -243,6 +255,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
 
 <!-- Versions -->
+[0.4.0]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.1...v0.4.0
 [0.4.0-beta.2]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.1...v0.4.0-beta.2
 [0.4.0-beta.1]: https://github.com/noelhorvath/nz/compare/v0.4.0-beta.0...v0.4.0-beta.1
 [0.4.0-beta.0]: https://github.com/noelhorvath/nz/compare/v0.3.4...v0.4.0-beta.0

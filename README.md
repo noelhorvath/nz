@@ -4,6 +4,7 @@
 [![crates.io]](https://crates.io/crates/nz/0.4.0)
 [![docs.rs]](https://docs.rs/nz/0.4.0/nz)
 [![rust-ci]](https://github.com/noelhorvath/nz/actions?query=branch%3A0.4.0)
+[![msrv]](https://releases.rs/docs/1.79.0/)
 ![unsafety]
 [![license]](#license)
 
@@ -11,6 +12,7 @@
 [crates.io]: https://img.shields.io/badge/crates.io-0.4.0-orange?style=for-the-badge&logo=rust
 [docs.rs]: https://img.shields.io/docsrs/nz/0.4.0?style=for-the-badge&logo=docs.rs
 [rust-ci]: https://img.shields.io/github/actions/workflow/status/noelhorvath/nz/check.yml?branch=0.4.0&style=for-the-badge&logo=github
+[msrv]: https://img.shields.io/badge/MSRV-1.79.0-F21D1D?style=for-the-badge&logo=rust
 [unsafety]: https://img.shields.io/badge/unsafe-forbidden-brightgreen?style=for-the-badge&logo=rust
 [license]: https://img.shields.io/badge/License-MIT_OR_Zlib_OR_APACHE_2.0-blue?style=for-the-badge
 

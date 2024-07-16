@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## Changed
 
+- Add `MSRV` back and set it to `1.78.0`
 - Correct comment in `lib.rs`
 - Update description and version in `Cargo.toml`
 - Correct `Features` section in `README.md`
